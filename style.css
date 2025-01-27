@@ -1,0 +1,64 @@
+/* Reset de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #ffffff;
+  color: #fff6ea;
+}
+
+/* En-tête */
+header {
+  background: #fff6ea;
+  color: #fff6ea;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  height: 70px;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+header ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Contenu principal */
+#titre {
+  padding: 4rem;
+  text-align: center;
+  background: url("assets/images/background.jpg") no-repeat center center/cover;
+  color: #ff914d;
+}
+
+#titre h1 {
+  font-size: 3rem;
+}
+
+/* Pied de page */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #fff6ea;
+  color: #ff914d;
+  margin-top: 2rem;
+}
