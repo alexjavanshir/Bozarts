@@ -54,6 +54,10 @@ header ul li a:hover {
   font-size: 3rem;
 }
 
+#debug h2 {
+  color: #ff914d;
+}
+
 /* Pied de page */
 footer {
   text-align: center;
