@@ -8,25 +8,98 @@
   </head>
   <body>
     <header>
-      <nav>
-        <img src="assets/LOGO.png" alt="BAZARTS" />
-      </nav>
+      <div class="logo">
+        <img src="assets/icons/LOGO.png" alt="BOZARTS" />
+      </div>
+
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Rechercher" />
+        <img
+          src="assets/icons/search-icon.png"
+          class="search-icon"
+          alt="search icon"
+        />
+        <span class="clear-icon">✕</span>
+      </div>
+
+      <div class="header-right">
+        <a href="panier.html" class="icon-button" style="width: 20%">
+          <img
+            src="assets/icons/panier-icon.png"
+            alt="Panier"
+            class="icon-img"
+          />
+        </a>
+        <a href="mes-transactions.html" class="icon-button">
+          <img
+            src="assets/icons/notifications-icon.png"
+            alt="Notifications"
+            class="icon-img"
+          />
+        </a>
+        <a href="profil.html" class="icon-button">
+          <img
+            src="assets/icons/profil-icon.png"
+            alt="Profil"
+            class="icon-img"
+          />
+        </a>
+      </div>
     </header>
 
     <main>
-      <section id="titre">
-        <h1>Bienvenue sur Bozarts</h1>
-        <p>Des créations qui racontent une histoire.</p>
+      <section>
+        <h2 class="section-title">Recherches récentes</h2>
+        <div class="recent-searches">
+          <!-- VIDE A LA BASE, A REMPLIR ENSUITE SUIVANT LES RECHERCHES DE L'UTILISATEUR       
+          <div class="search-item">Tableau</div>
+          <div class="search-item">Fauteil orange</div>
+          <div class="search-item">Table en verre</div>
+          <div class="search-item">Pot en ceramique</div>
+          -->
+        </div>
       </section>
-      <section id="carousel">
-        <div class="slider">
-          <div class="slides">
-            <img src="assets/article1.jpg" alt="Article 1" />
-            <img src="assets/article2.jpg" alt="Article 2" />
-            <img src="assets/article3.jpg" alt="Article 3" />
-            <img src="assets/article4.jpg" alt="Article 4" />
-            <img src="assets/article5.jpg" alt="Article 5" />
-            <img src="assets/article6.jpg" alt="Article 6" />
+
+      <section>
+        <h2 class="section-title">Tendance du moment</h2>
+        <div class="trending-items">
+          <div class="item-card">
+            <img src="assets/article1.jpg" alt="Tableau" class="item-image" />
+          </div>
+          <div class="item-card">
+            <img
+              src="assets/article2.jpg"
+              alt="Fauteil orange"
+              class="item-image"
+            />
+          </div>
+          <div class="item-card">
+            <img
+              src="assets/article3.jpg"
+              alt="Table en verre"
+              class="item-image"
+            />
+          </div>
+          <div class="item-card">
+            <img
+              src="assets/article4.jpg"
+              alt="Pot en ceramique"
+              class="item-image"
+            />
+          </div>
+          <div class="item-card">
+            <img
+              src="assets/article5.jpg"
+              alt="Vase en verre bleu"
+              class="item-image"
+            />
+          </div>
+          <div class="item-card">
+            <img
+              src="assets/article6.jpg"
+              alt="Horloge en marbre noir"
+              class="item-image"
+            />
           </div>
         </div>
       </section>
@@ -44,15 +117,14 @@
           <li><a href="parametres.html">Paramètres</a></li>
           <li><a href="produit.html">Produit</a></li>
           <li><a href="profil.html">Profil</a></li>
-          <li><a href="recherche.html">Recherche </a></li>
+          <li><a href="recherche.html">Recherche</a></li>
         </ul>
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      <div>© 2025 Bozarts. Tous droits réservés.</div>
+      <a href="#" class="faq-button">Notre FAQ</a>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>
