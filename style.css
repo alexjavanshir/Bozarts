@@ -103,6 +103,34 @@ header ul li a:hover {
 }
 /* Carrousel */
 
+/* Section debug */
+#debug {
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  max-width: 900px;
+}
+
+#debug ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#debug ul li a {
+  color: #ff914d;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ff914d;
+  border-radius: 4px;
+}
+
+#debug ul li a:hover {
+  background: #ff914d;
+  color: white;
+}
+
 /* Pied de page */
 footer {
   text-align: center;
