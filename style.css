@@ -58,6 +58,51 @@ header ul li a:hover {
   color: #ff914d;
 }
 
+/* Carrousel */
+#carousel {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 900px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slides img {
+  min-width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Animation du carrousel */
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-550%);
+  }
+}
+
+.slides {
+  width: 80%; /* 7 images: 6 originales + 1 copie de la première */
+  animation: carousel 30s infinite linear;
+}
+/* Carrousel */
+
 /* Pied de page */
 footer {
   text-align: center;
