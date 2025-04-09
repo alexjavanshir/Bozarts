@@ -143,14 +143,6 @@ main {
   border: 5px solid #ff914d;
 }
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 20px;
-  margin-top: 30px;
-  color: #ff914d;
-}
-
 .faq-button {
   background-color: #ff914d;
   color: white;
@@ -183,4 +175,12 @@ footer {
   padding: 5px 10px;
   border: 1px solid #ff914d;
   border-radius: 4px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  margin-top: 30px;
+  color: #ff914d;
 }
