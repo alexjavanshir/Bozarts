@@ -3,29 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connexion</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Connexion - Bozarts</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header>
-      <div class="logo">
-        <a href="index.html" class="icon-button">
-          <img src="assets/icons/LOGO.png" alt="BOZARTS" />
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/icons/LOGO.png" alt="Bozarts" />
         </a>
-      </div>
+      </nav>
     </header>
 
     <main>
-      <section id="section-title">
-        <h1>Connexion</h1>
-        <p>Des créations qui racontent une histoire.</p>
-      </section>
+      <div class="form-container">
+        <h1>FORMULAIRE DE CONNEXION</h1>
+        <form action="includes/login.php" method="POST" class="connexion-form">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <button type="submit" class="form-submit">Connexion</button>
+
+          <div class="form-links">
+            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+            <a href="inscription.html" class="create-account">Pas encore de compte ?</a>
+          </div>
+        </form>
+      </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      <div class="footer-content">
+        <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      </div>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

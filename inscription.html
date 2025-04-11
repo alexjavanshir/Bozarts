@@ -3,52 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inscription</title>
-    <link rel="stylesheet" href="login-signin.css" />
+    <title>Inscription - Bozarts</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header>
-      <div class="logo">
-        <a href="index.html" class="icon-button">
-          <img src="assets/icons/LOGO.png" alt="BOZARTS" />
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/icons/logo.png" alt="Bozarts" />
         </a>
-      </div>
+      </nav>
     </header>
 
     <main>
-      <section id="formulaire-inscription">
-        <h1>FORMULAIRE D’INSCRIPTION</h1>
-        <form class="form-box">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required />
-
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" required />
-
-          <label for="confirm-password">Confirmer le mot de passe</label>
-          <input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            required
-          />
-
-          <div class="checkbox-row">
-            <label class="checkbox-label">
-              <a href="#">J’accepte les conditions d’utilisation</a>
-            </label>
-            <input type="checkbox" id="terms" name="terms" required />
+      <div class="form-container">
+        <h1>FORMULAIRE D'INSCRIPTION</h1>
+        <form action="includes/register.php" method="POST" class="inscription-form">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
           </div>
 
-          <button type="submit" class="submit-button">Inscription</button>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Comfirmer le mot de passe</label>
+            <input type="password" id="confirm-password" name="confirm-password" required />
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="conditions" name="conditions" required />
+            <label for="conditions">J'accepte les conditions d'utilisation</label>
+          </div>
+
+          <button type="submit" class="form-submit">Inscription</button>
         </form>
-      </section>
+      </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      <div class="footer-content">
+        <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      </div>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

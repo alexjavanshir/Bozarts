@@ -3,29 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bozarts</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Mon Panier - Bozarts</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header>
-      <div class="logo">
-        <a href="index.html" class="icon-button">
-          <img src="assets/icons/LOGO.png" alt="BOZARTS" />
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/icons/LOGO.png" alt="Bozarts" />
         </a>
-      </div>
+        <div class="nav-icons">
+          <a href="panier.html" class="icon-button active">
+            <img src="assets/icons/cart.png" alt="Panier" />
+          </a>
+          <a href="#" class="icon-button">
+            <img src="assets/icons/notifications.png" alt="Notifications" />
+          </a>
+          <a href="profil.html" class="icon-button">
+            <img src="assets/icons/profile.png" alt="Profil" />
+          </a>
+        </div>
+      </nav>
     </header>
 
-    <main>
-      <section id="section-title">
-        <h1>Panier</h1>
-        <p>Des créations qui racontent une histoire.</p>
-      </section>
+    <main class="cart-container">
+      <h1>MON PANIER</h1>
+
+      <div class="cart-content">
+        <div class="cart-items">
+          <div class="cart-item">
+            <div class="item-image">
+              <img src="assets/images/chaise-jardin.jpg" alt="Chaise de jardin" />
+            </div>
+            <div class="item-details">
+              <h3>Chaise de jardin orange et noir motifs losange</h3>
+              <p>Quantité : 1</p>
+              <p>Prix : 140€</p>
+            </div>
+          </div>
+
+          <div class="cart-item">
+            <div class="item-image">
+              <img src="assets/images/poterie-jaune.jpg" alt="Poterie jaune" />
+            </div>
+            <div class="item-details">
+              <h3>Poterie jaune</h3>
+              <p>Quantité : 2</p>
+              <p>Prix : 60€</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <h2>Total</h2>
+          <div class="summary-details">
+            <div class="summary-line">
+              <span>Sous-Total :</span>
+              <span>200€</span>
+            </div>
+            <div class="summary-line">
+              <span>Livraison :</span>
+              <span>10€</span>
+            </div>
+            <div class="summary-line total">
+              <span>Total :</span>
+              <span>210€</span>
+            </div>
+            <button class="checkout-button">Paiement</button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      <div class="footer-content">
+        <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      </div>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

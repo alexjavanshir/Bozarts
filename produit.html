@@ -3,27 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Produit</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Chaise de jardin - Bozarts</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header>
-      <div class="logo">
-        <a href="index.html" class="icon-button">
-          <img src="assets/icons/LOGO.png" alt="BOZARTS" />
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/icons/logo.png" alt="Bozarts" />
         </a>
-      </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher..." />
+          <button class="close-search">×</button>
+        </div>
+        <div class="nav-icons">
+          <a href="panier.html" class="icon-button">
+            <img src="assets/icons/cart.png" alt="Panier" />
+          </a>
+          <a href="#" class="icon-button">
+            <img src="assets/icons/notifications.png" alt="Notifications" />
+          </a>
+          <a href="profil.html" class="icon-button">
+            <img src="assets/icons/profile.png" alt="Profil" />
+          </a>
+        </div>
+      </nav>
     </header>
 
-    <main>
-      <section id="section-title">
-        <h1>Produit</h1>
-        <p>Des créations qui racontent une histoire.</p>
-      </section>
+    <main class="product-container">
+      <div class="product-image">
+        <img src="assets/images/chaise-jardin.jpg" alt="Chaise de jardin orange et noir motifs losange" />
+      </div>
+
+      <div class="product-info">
+        <h1>CHAISE DE JARDIN ORANGE ET NOIR MOTIFS LOSANGE</h1>
+        
+        <div class="product-details">
+          <p class="reference">Référence CHIASEN5</p>
+          <p class="description">
+            Chaise de jardin tressée à la main par nos artisans partenaires sénégalais,
+            une création artisanale unique fabriquée avec du fil de pêche et du métal
+            recyclé. Ce fauteuil tissé multicolore est parfait pour votre espace extérieur,
+            votre véranda ou votre salon. Optez pour le confort et le style ethnique
+            avec notre chaise de jardin garantissant un soutien durable aux artisans
+            locaux.
+          </p>
+          <p class="price">140,00€</p>
+
+          <div class="quantity-selector">
+            <button class="quantity-btn minus">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="quantity-btn plus">+</button>
+          </div>
+
+          <button class="add-to-cart">
+            <img src="assets/icons/cart-white.png" alt="Panier">
+            Ajouter au panier
+          </button>
+        </div>
+
+        <button class="contact-seller">Envoyer un message à l'annonceur</button>
+      </div>
     </main>
 
+    <section class="technical-info">
+      <h2>FICHE TECHNIQUE</h2>
+      <!-- Le contenu de la fiche technique sera ajouté ici -->
+    </section>
+
     <footer>
-      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      <div class="footer-content">
+        <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+      </div>
     </footer>
 
     <script src="script.js"></script>
