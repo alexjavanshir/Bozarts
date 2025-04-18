@@ -24,9 +24,6 @@ CREATE TABLE IF NOT EXISTS produits (
     nom VARCHAR(255) NOT NULL,
     description TEXT,
     prix DECIMAL(10,2) NOT NULL,
-    materiau VARCHAR(100),
-    dimensions VARCHAR(100),
-    delai_fabrication INT, -- en jours
     image_url VARCHAR(255),
     categorie VARCHAR(100),
     en_stock BOOLEAN DEFAULT TRUE,
@@ -111,6 +108,7 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (destinataire_id) REFERENCES utilisateurs(id)
 );
 
+
 -- Table pour le panier
 CREATE TABLE IF NOT EXISTS paniers (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -131,3 +129,26 @@ CREATE TABLE IF NOT EXISTS faq (
     categorie VARCHAR(100),
     date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Insertion des données de test
+
+-- Insertion des clients
+INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, adresse, telephone) VALUES
+('client', 'Dupont', 'Jean', 'jean.dupont@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123 rue de Paris, 75001 Paris', '0612345678'),
+('client', 'Martin', 'Sophie', 'sophie.martin@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456 avenue des Champs, 75008 Paris', '0623456789'),
+('client', 'Bernard', 'Pierre', 'pierre.bernard@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '789 boulevard Saint-Germain, 75006 Paris', '0634567890');
+
+-- Insertion des artisans
+INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, description, adresse, telephone) VALUES
+('artisan', 'Leroy', 'Marie', 'marie.leroy@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Artisan céramiste passionnée depuis 10 ans', '321 rue de la Poterie, 75011 Paris', '0645678901'),
+('artisan', 'Petit', 'Luc', 'luc.petit@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sculpteur sur bois spécialisé dans le mobilier artisanal', '654 avenue du Bois, 75012 Paris', '0656789012'),
+('artisan', 'Moreau', 'Julie', 'julie.moreau@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Créatrice de bijoux en argent et pierres naturelles', '987 rue des Artisans, 75013 Paris', '0667890123');
+
+-- Insertion des produits
+INSERT INTO produits (artisan_id, nom, description, prix, image_url, categorie) VALUES
+(4, 'Vase en céramique bleu', 'Vase artisanal en céramique émaillée bleue, pièce unique', 89.99, 'vase_bleu.jpg', 'Céramique'),
+(4, 'Service à thé', 'Service à thé complet en céramique blanche avec motifs floraux', 149.99, 'service_the.jpg', 'Céramique'),
+(5, 'Table basse en chêne', 'Table basse sculptée en chêne massif, design contemporain', 299.99, 'table_basse.jpg', 'Mobilier'),
+(5, 'Chaise artisanale', 'Chaise en bois massif avec dossier sculpté', 199.99, 'chaise.jpg', 'Mobilier'),
+(6, 'Collier en argent', 'Collier en argent 925 avec pierre de lune', 79.99, 'collier.jpg', 'Bijoux'),
+(6, 'Boucles d\'oreilles', 'Boucles d\'oreilles en argent avec améthyste', 59.99, 'boucles_oreilles.jpg', 'Bijoux');
