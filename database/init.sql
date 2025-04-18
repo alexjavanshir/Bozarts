@@ -145,7 +145,7 @@ INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, description, a
 ('artisan', 'Moreau', 'Julie', 'julie.moreau@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Créatrice de bijoux en argent et pierres naturelles', '987 rue des Artisans, 75013 Paris', '0667890123');
 
 -- Insertion des produits
-INSERT INTO produits (artisan_id, nom, description, prix, image_url, categorie) VALUES
+INSERT INTO produits (artisan_id, nom6, description, prix, image_url, categorie) VALUES
 (4, 'Vase en céramique bleu', 'Vase artisanal en céramique émaillée bleue, pièce unique', 89.99, 'vase_bleu.jpg', 'Céramique'),
 (4, 'Service à thé', 'Service à thé complet en céramique blanche avec motifs floraux', 149.99, 'service_the.jpg', 'Céramique'),
 (5, 'Table basse en chêne', 'Table basse sculptée en chêne massif, design contemporain', 299.99, 'table_basse.jpg', 'Mobilier'),
