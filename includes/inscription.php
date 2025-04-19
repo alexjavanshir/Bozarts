@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Validation
         if ($password !== $confirm_password) {
-            throw new Exception("Les mots de passe ne correspondent pas.");
+            throw new Exception("Les mots de passe ne correspondent pas!");
         }
 
         // Vérifier si l'email existe déjà
@@ -56,14 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user_id;
         
         // Redirection vers completer-profil.html
-        header("Location: http://localhost/Bozarts/completer-profil.html");
+        header("Location: http://localhost/Bozarts/pages/completer-profil.html");
         exit();
     } catch (Exception $e) {
         die("Erreur : " . $e->getMessage());
     }
 } else {
     // Si ce n'est pas une requête POST, rediriger vers la page d'inscription
-    header("Location: ../inscription.html");
+    header("Location: ../pages/inscription.html");
     exit();
 }
 ?>

@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inscription - Bozarts</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/forms.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/forms.css" />
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <a href="index.html" class="logo">
-          <img src="assets/icons/logo.png" alt="Bozarts" />
+        <a href="../pages/index.html" class="logo">
+          <img src="../assets/icons/logo.png" alt="Bozarts" />
         </a>
       </nav>
     </header>
@@ -45,10 +45,17 @@
       </div>
     </main>
 
+    <div id="message-erreur" class="hidden">
+      <h2>Les mots de passe ne correspondent pas.</h2>
+      <p>Veuillez réessayer.</p>
+      <button id="fermer">Fermer</button>
+    </div>
+
     <footer>
       <div class="footer-content">
         <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
       </div>
     </footer>
+    <script src="../js/inscription.js"></script>
   </body>
 </html>
