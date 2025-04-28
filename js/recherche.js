@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     performSearch(searchTerm);
   } else {
     // Afficher un message si aucun terme de recherche n'est présent
-    document.getElementById('search-results').innerHTML = '<p>Veuillez saisir un terme de recherche.</p>';
+    document.getElementById('search-results').innerHTML = '<p><div class="error-message">Veuillez saisir un terme de recherche.</div></p>';
   }
 });
 
@@ -50,7 +50,7 @@ function displaySearchResults(products) {
   resultsContainer.innerHTML = '';
 
   if (!products || products.length === 0) {
-    resultsContainer.innerHTML = '<p>Aucun résultat trouvé pour votre recherche.</p>';
+    resultsContainer.innerHTML = '<p><div class="error-message">Aucun résultat trouvé pour votre recherche.</div></p>';
     return;
   }
 
@@ -64,13 +64,13 @@ function displaySearchResults(products) {
     productCard.className = 'product-card';
     
     // Vérifier si les propriétés existent et utiliser des valeurs par défaut si nécessaire
-    const imageUrl = product.image_url || '../assets/images/default-product.jpg';
+    const imageUrl = product.image_url ? `../assets/articles/${product.image_url}` : '../assets/articles/default-product.jpg';
     const nom = product.nom || 'Produit sans nom';
     const description = product.description || 'Aucune description disponible';
     const prix = product.formatted_price || `${product.prix} €`;
     
     productCard.innerHTML = `
-      <img src="${imageUrl}" alt="${nom}" onerror="this.src='../assets/images/default-product.jpg'">
+      <img src="${imageUrl}" alt="${nom}" onerror="this.src='../assets/articles/default-product.jpg'">
       <h3>${nom}</h3>
       <p>${description}</p>
       <p class="price">${prix}</p>

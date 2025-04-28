@@ -81,6 +81,13 @@
   overflow: hidden;
 }
 
+h1 {
+  font-size: 20px;
+  color: #f47f3b;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
 .error-message {
   grid-column: 1 / -1;
   background-color: #ffe0e0;
@@ -90,5 +97,5 @@
   border-radius: 8px;
   margin: 20px 0;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
 } 

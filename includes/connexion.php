@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_email'] = $user['email'];
                 
                 // Redirection selon le type d'utilisateur
-                header("Location: ../profil.html");
+                header("Location: ../pages/profil.html");
                 exit();
             } else {
                 $error = "Email ou mot de passe incorrect.";
