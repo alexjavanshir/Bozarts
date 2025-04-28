@@ -4,7 +4,7 @@ require_once "../config/database.php";
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../inscription.html");
+    header("Location: ../pages/inscription.html");
     exit();
 }
 
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Rediriger vers la page de profil
-        header("Location: ../profil.html");
+        header("Location: ../pages/profil.html");
         exit();
     } else {
         die("Erreur lors de la mise à jour du profil : " . $stmt->error);
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Si ce n'est pas une requête POST, rediriger vers le formulaire HTML
-header("Location: ../completer-profil.html");
+header("Location: ../pages/completer-profil.html");
 exit();
 ?>
 
