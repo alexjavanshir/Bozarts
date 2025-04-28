@@ -1,58 +1,72 @@
 <?php
-require_once '../config/database.php';
+// Définir le header content-type pour JSON
+header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $search = isset($_GET["search"]) ? trim($_GET["search"]) : "";
-    $specialite = isset($_GET["specialite"]) ? trim($_GET["specialite"]) : "";
-    $min_price = isset($_GET["min_price"]) ? floatval($_GET["min_price"]) : 0;
-    $max_price = isset($_GET["max_price"]) ? floatval($_GET["max_price"]) : PHP_FLOAT_MAX;
+// Vérifier si le fichier de configuration existe
+if (!file_exists('../config/database.php')) {
+    echo json_encode(array("error" => "Fichier de configuration introuvable"));
+    exit;
+}
 
-    $sql = "SELECT p.*, a.nom as artisan_nom, a.prenom as artisan_prenom, a.specialite 
-            FROM produits p 
-            JOIN artisans a ON p.artisan_id = a.id 
-            WHERE 1=1";
-
-    $params = array();
-    $types = "";
-
-    if (!empty($search)) {
-        $sql .= " AND (p.nom LIKE ? OR p.description LIKE ?)";
-        $search_param = "%" . $search . "%";
-        $params[] = $search_param;
-        $params[] = $search_param;
-        $types .= "ss";
+// Essayer de se connecter à la base de données
+try {
+    require_once '../config/database.php';
+    
+    // Vérifier si la connexion a été établie
+    if (!isset($conn) || !$conn) {
+        echo json_encode(array("error" => "Connexion à la base de données échouée"));
+        exit;
     }
+    
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $search = isset($_GET["search"]) ? trim($_GET["search"]) : "";
+        $min_price = isset($_GET["min_price"]) ? floatval($_GET["min_price"]) : 0;
+        $max_price = isset($_GET["max_price"]) ? floatval($_GET["max_price"]) : PHP_FLOAT_MAX;
 
-    if (!empty($specialite)) {
-        $sql .= " AND a.specialite = ?";
-        $params[] = $specialite;
-        $types .= "s";
-    }
-
-    $sql .= " AND p.prix BETWEEN ? AND ?";
-    $params[] = $min_price;
-    $params[] = $max_price;
-    $types .= "dd";
-
-    if ($stmt = mysqli_prepare($conn, $sql)) {
-        if (!empty($params)) {
-            mysqli_stmt_bind_param($stmt, $types, ...$params);
+        // Pour déboguer
+        error_log("Recherche: " . $search);
+        
+        // Requête simplifiée sans la table artisans
+        $sql = "SELECT * FROM produits WHERE (nom LIKE ? OR description LIKE ?)";
+        
+        if ($min_price > 0 || $max_price < PHP_FLOAT_MAX) {
+            $sql .= " AND prix BETWEEN ? AND ?";
         }
         
-        if (mysqli_stmt_execute($stmt)) {
-            $result = mysqli_stmt_get_result($stmt);
-            $products = array();
-            
-            while ($row = mysqli_fetch_assoc($result)) {
-                $products[] = $row;
+        $search_param = "%" . $search . "%";
+        
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            if ($min_price > 0 || $max_price < PHP_FLOAT_MAX) {
+                mysqli_stmt_bind_param($stmt, "ssdd", $search_param, $search_param, $min_price, $max_price);
+            } else {
+                mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
             }
             
-            echo json_encode($products);
+            if (mysqli_stmt_execute($stmt)) {
+                $result = mysqli_stmt_get_result($stmt);
+                $products = array();
+                
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Formater le prix pour l'affichage
+                    $row['formatted_price'] = number_format($row['prix'], 2, ',', ' ') . ' €';
+                    $products[] = $row;
+                }
+                
+                echo json_encode($products);
+            } else {
+                echo json_encode(array("error" => "Erreur d'exécution: " . mysqli_error($conn)));
+            }
+            
+            mysqli_stmt_close($stmt);
         } else {
-            echo json_encode(array("error" => "Une erreur est survenue lors de la recherche."));
+            echo json_encode(array("error" => "Erreur de préparation: " . mysqli_error($conn)));
         }
+        
+        mysqli_close($conn);
+    } else {
+        echo json_encode(array("error" => "Méthode non autorisée"));
     }
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+} catch (Exception $e) {
+    echo json_encode(array("error" => "Exception: " . $e->getMessage()));
 }
 ?>

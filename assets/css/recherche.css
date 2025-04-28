@@ -1,0 +1,94 @@
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+  padding: 0 30px;
+}
+
+.search-count {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #555;
+  grid-column: 1 / -1;
+  border-bottom: 1px solid #eee;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  color: var(--primary-color);
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.product-card .price {
+  font-weight: bold;
+  color: var(--secondary-color);
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.product-card button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+.product-card button:hover {
+  background-color: #e06d29;
+}
+
+.product-card .artisan {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  margin-bottom: 12px;
+  color: #666;
+  line-height: 1.4;
+  max-height: 85px;
+  overflow: hidden;
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  background-color: #ffe0e0;
+  border: 1px solid #ff8080;
+  color: #c00000;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+  font-size: 16px;
+} 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recherche</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/recherche.css" />
   </head>
   <body>
     <header>
@@ -13,12 +14,24 @@
           <img src="../assets/icons/LOGO.png" alt="BOZARTS" />
         </a>
       </div>
+      <div class="search-container">
+        <form action="recherche.html" method="get">
+          <input type="text" name="search" class="search-box" placeholder="Rechercher" />
+          <button type="submit" class="search-button">
+            <img src="../assets/icons/search-icon.png" class="search-icon" alt="search icon" />
+          </button>
+        </form>
+      </div>
     </header>
 
     <main>
       <section id="section-title">
-        <h1>Recherche</h1>
+        <h1>Résultats de recherche</h1>
         <p>Des créations qui racontent une histoire.</p>
+      </section>
+
+      <section id="search-results">
+        <!-- Les résultats seront affichés ici dynamiquement -->
       </section>
     </main>
 
@@ -26,6 +39,6 @@
       <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../js/recherche.js"></script>
   </body>
 </html>
