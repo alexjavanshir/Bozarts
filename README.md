@@ -19,9 +19,11 @@ bozarts/
 ├── assets/
 │   ├── css/
 │   │   ├── style.css
-│   │   └── gallery.css
+│   │   └── recherche.css
+│   │   └── form.css
 │   ├── js/
-│   │   └── main.js
+│   │   ├── main.css
+│   │   └── recherche.js
 │   └── images/
 ├── config/
 │   └── database.php
