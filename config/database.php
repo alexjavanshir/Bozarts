@@ -10,6 +10,14 @@ try {
     if (!$conn) {
         throw new Exception("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
     }
+    
+    // Ajouter cet événement pour fermer la connexion à la fin du script
+    register_shutdown_function(function() use ($conn) {
+        if ($conn && mysqli_ping($conn)) {
+            mysqli_close($conn);
+        }
+    });
+    
 } catch (Exception $e) {
     die($e->getMessage());
 }
