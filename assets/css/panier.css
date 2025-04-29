@@ -27,12 +27,14 @@
     padding: 1.5rem;
     border-radius: var(--border-radius, 10px);
     box-shadow: var(--shadow, 0 2px 4px rgba(0,0,0,0.1));
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.5s ease;
     max-width: 300px;
     width: 100%;
+    background-color: #2b3e50;
 }
 
 .cart-item:hover {
+    background-color: #f47f3b;
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
@@ -44,8 +46,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    border: 2px solid var(--primary-color, #f47f3b);
     border-radius: 10px;
     overflow: hidden;
 }

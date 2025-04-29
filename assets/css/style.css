@@ -157,6 +157,7 @@ header {
     border-radius: 8px;
     padding: 0.5rem 1rem;
     width: 300px;
+    
 }
 
 .search-bar input {
@@ -381,6 +382,14 @@ footer {
     border-radius: 30px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .search-box:hover,
+  .search-box:focus {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px 0px 7px rgba(244, 127, 59, 0.2);
+    background-color: white;
   }
   
   .search-icon {
@@ -485,8 +494,10 @@ footer {
     padding: 10px 20px;
     border-radius: 10px;
     text-decoration: none;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
   }
 
   .faq-button:hover{

@@ -4,33 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Détails du produit - Bozarts</title>
-    <link rel="stylesheet" href="../assets/css/produit.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/produit.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar">
-        <a href="../pages/index.html" class="logo">
-          <img src="../assets/icons/logo.png" alt="Bozarts" />
+      <div class="logo">
+        <a href="../pages/index.html" class="icon-button">
+          <img src="../assets/icons/LOGO.png" alt="BOZARTS" />
         </a>
-        <div class="search-bar">
-          <input type="text" placeholder="Rechercher..." />
-          <button class="close-search">×</button>
-        </div>
-        <div class="nav-icons">
-          <a href="panier.html" class="icon-button">
-            <img src="../assets/icons/panier-icon.png" alt="Panier" />
-          </a>
-          <a href="#" class="icon-button">
-            <img src="../assets/icons/notifications-icon.png" alt="Notifications" />
-          </a>
-          <a href="profil.html" class="icon-button">
-            <img src="../assets/icons/profil-icon.png" alt="Profil" />
-          </a>
-        </div>
-      </nav>
+      </div>
+      <div class="search-container">
+        <form action="recherche.html" method="get">
+          <input type="text" name="search" class="search-box" placeholder="Rechercher" />
+          <button type="submit" class="search-button">
+            <img src="../assets/icons/search-icon.png" class="search-icon" alt="search icon" />
+          </button>
+        </form>
+      </div>
+      <div class="header-right">
+        <a href="panier.html" class="icon-button" style="width: 20%">
+          <img
+            src="../assets/icons/panier-icon.png"
+            alt="Panier"
+            class="icon-img"
+          />
+        </a>
+        <a href="mes-transactions.html" class="icon-button">
+          <img
+            src="../assets/icons/notifications-icon.png"
+            alt="Notifications"
+            class="icon-img"
+          />
+        </a>
+        <a href="connexion.html" class="icon-button">
+          <img
+            src="../assets/icons/profil-icon.png"
+            alt="Profil"
+            class="icon-img"
+          />
+        </a>
+      </div>
     </header>
-
     <main class="product-container">
       <div class="product-image">
         <img id="product-img" src="" alt="Image du produit" />
