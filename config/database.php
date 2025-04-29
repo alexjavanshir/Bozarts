@@ -1,8 +1,8 @@
 <?php
-define('DB_SERVER', 'herogu.garageisep.com');
-define('DB_USERNAME', 'ryDpk02xS4_bozarts');
-define('DB_PASSWORD', 'S5G9rjvfzQYDGk0d');
-define('DB_NAME', 'khL3GZYk4J_bozarts');
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'root');
+define('DB_NAME', 'bozarts');
 
 // Connexion à la base de données
 try {  

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chaise de jardin - Bozarts</title>
+    <title>Détails du produit - Bozarts</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
@@ -32,23 +32,16 @@
 
     <main class="product-container">
       <div class="product-image">
-        <img src="../assets/images/chaise-jardin.jpg" alt="Chaise de jardin orange et noir motifs losange" />
+        <img id="product-img" src="" alt="Image du produit" />
       </div>
 
       <div class="product-info">
-        <h1>CHAISE DE JARDIN ORANGE ET NOIR MOTIFS LOSANGE</h1>
+        <h1 id="product-title"></h1>
         
         <div class="product-details">
-          <p class="reference">Référence CHIASEN5</p>
-          <p class="description">
-            Chaise de jardin tressée à la main par nos artisans partenaires sénégalais,
-            une création artisanale unique fabriquée avec du fil de pêche et du métal
-            recyclé. Ce fauteuil tissé multicolore est parfait pour votre espace extérieur,
-            votre véranda ou votre salon. Optez pour le confort et le style ethnique
-            avec notre chaise de jardin garantissant un soutien durable aux artisans
-            locaux.
-          </p>
-          <p class="price">140,00€</p>
+          <p class="reference" id="product-reference"></p>
+          <p class="description" id="product-description"></p>
+          <p class="price" id="product-price"></p>
 
           <div class="quantity-selector">
             <button class="quantity-btn minus">-</button>
@@ -57,7 +50,6 @@
           </div>
 
           <button class="add-to-cart">
-            <img src="../assets/icons/cart-white.png" alt="Panier">
             Ajouter au panier
           </button>
         </div>
@@ -77,6 +69,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../js/produit.js"></script>
   </body>
 </html>

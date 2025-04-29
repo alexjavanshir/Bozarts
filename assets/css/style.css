@@ -153,8 +153,7 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    background-color: var(--background-color);
-    border: 3px solid var(--secondary-color);
+    background-color: var(--white);
     border-radius: 8px;
     padding: 0.5rem 1rem;
     width: 300px;
@@ -165,7 +164,6 @@ header {
     outline: none;
     width: 100%;
     padding: 8px;
-    background-color: var(--background-color);
     font-size: 16px;
 }
 
@@ -293,7 +291,7 @@ header {
     border-radius: 5px;
     padding: 0.5rem;
 }
-
+/* Bouton "Ajouter au panier" */
 .add-to-cart {
     background-color: var(--primary-color);
     color: var(--white);
@@ -305,6 +303,24 @@ header {
     align-items: center;
     gap: 0.5rem;
     margin: 1rem 0;
+    border-radius: 10px;
+}
+/* Hover sur le bouton "Ajouter au panier" */
+.add-to-cart:hover {
+    background: #d6611e;
+    transition: 0.2s ease;
+}
+
+/* Hover sur le bouton "Envoyer un message à l'annonceur" */
+.contact-seller:hover {
+    background: #19242f;
+    transition: 0.2s ease;
+}
+
+/* Hover sur les boutons de quantité */
+.quantity-btn:hover {
+    background: #19242f;
+    transition: 0.2s ease;
 }
 
 .contact-seller {
@@ -313,7 +329,7 @@ header {
     background-color: var(--secondary-color);
     color: var(--white);
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     margin-top: 1rem;
 }

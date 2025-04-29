@@ -64,13 +64,13 @@ function displaySearchResults(products) {
     productCard.className = 'product-card';
     
     // Vérifier si les propriétés existent et utiliser des valeurs par défaut si nécessaire
-    const imageUrl = product.image_url ? `../assets/articles/${product.image_url}` : '../assets/articles/default-product.jpg';
+    //const imageUrl = product.image_url ? `../assets/articles/${product.image_url}` : '../assets/articles/article_sans_image.jpg';
     const nom = product.nom || 'Produit sans nom';
     const description = product.description || 'Aucune description disponible';
     const prix = product.formatted_price || `${product.prix} €`;
     
     productCard.innerHTML = `
-      <img src="${imageUrl}" alt="${nom}" onerror="this.src='../assets/articles/default-product.jpg'">
+      <img src= ../assets/articles/article${product.id}.jpg>
       <h3>${nom}</h3>
       <p>${description}</p>
       <p class="price">${prix}</p>
