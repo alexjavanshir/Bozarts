@@ -2,77 +2,69 @@
 // Définir le header content-type
 header('Content-Type: text/html; charset=utf-8');
 
-echo "<h1>Test de connexion à la base de données</h1>";
+// Afficher les erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+// Fonction pour exécuter les requêtes SQL du fichier init.sql
+function executeInitSQL() {
+    global $conn;
+    
+    // Récupérer le contenu du fichier init.sql
+    $initSQL = file_get_contents('database/init.sql');
+    
+    if (!$initSQL) {
+        return "Erreur: Impossible de lire le fichier init.sql";
+    }
+    
+    // Diviser le fichier en requêtes individuelles
+    $queries = explode(';', $initSQL);
+    
+    // Exécuter chaque requête
+    $error = false;
+    $results = [];
+    
+    foreach ($queries as $query) {
+        $query = trim($query);
+        if (empty($query)) continue;
+        
+        $result = mysqli_query($conn, $query);
+        if (!$result) {
+            $error = true;
+            $results[] = "Erreur dans la requête: " . mysqli_error($conn) . "<br>Requête: " . htmlspecialchars($query);
+        } else {
+            $results[] = "Succès: " . htmlspecialchars(substr($query, 0, 50)) . "...";
+        }
+    }
+    
+    if ($error) {
+        return "Certaines requêtes ont échoué:<br>" . implode("<br>", $results);
+    } else {
+        return "Toutes les requêtes ont été exécutées avec succès!";
+    }
+}
+
+// Essayer de se connecter à la base de données
 try {
-    // Vérifier si le fichier de configuration existe
-    if (!file_exists('../config/database.php')) {
-        echo "<p style='color:red'>ERREUR: Fichier de configuration introuvable</p>";
-        exit;
-    }
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     
-    echo "<p>Fichier de configuration trouvé, tentative de connexion...</p>";
-    
-    // Inclure le fichier de configuration
-    require_once '../config/database.php';
-    
-    // Vérifier si la connexion a été établie
-    if (!isset($conn)) {
-        echo "<p style='color:red'>ERREUR: Variable \$conn non définie</p>";
-        exit;
-    }
-    
+    // Vérifier la connexion
     if (!$conn) {
-        echo "<p style='color:red'>ERREUR: Connexion échouée: " . mysqli_connect_error() . "</p>";
-        exit;
+        throw new Exception("Erreur de connexion: " . mysqli_connect_error());
     }
     
-    echo "<p style='color:green'>Connexion à la base de données réussie!</p>";
+    echo "<h1>Test de connexion à la base de données</h1>";
+    echo "<p>Connexion réussie à la base de données!</p>";
     
-    // Tester une requête simple
-    echo "<h2>Test de la requête sur la table produits</h2>";
-    
-    $sql = "SHOW TABLES";
-    $result = mysqli_query($conn, $sql);
-    
-    if (!$result) {
-        echo "<p style='color:red'>ERREUR: " . mysqli_error($conn) . "</p>";
-    } else {
-        echo "<p>Tables disponibles:</p>";
-        echo "<ul>";
-        while ($row = mysqli_fetch_row($result)) {
-            echo "<li>" . $row[0] . "</li>";
-        }
-        echo "</ul>";
-    }
-    
-    // Tester la table produits
-    $sql = "DESCRIBE produits";
-    $result = mysqli_query($conn, $sql);
-    
-    if (!$result) {
-        echo "<p style='color:red'>ERREUR: La table 'produits' n'existe pas: " . mysqli_error($conn) . "</p>";
-    } else {
-        echo "<p>Structure de la table produits:</p>";
-        echo "<table border='1'>";
-        echo "<tr><th>Champ</th><th>Type</th><th>Null</th><th>Clé</th><th>Défaut</th><th>Extra</th></tr>";
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $row['Field'] . "</td>";
-            echo "<td>" . $row['Type'] . "</td>";
-            echo "<td>" . $row['Null'] . "</td>";
-            echo "<td>" . $row['Key'] . "</td>";
-            echo "<td>" . $row['Default'] . "</td>";
-            echo "<td>" . $row['Extra'] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-    }
+    // Exécuter les requêtes d'initialisation
+    echo "<h2>Initialisation de la base de données</h2>";
+    echo "<p>" . executeInitSQL() . "</p>";
     
     // Fermer la connexion
     mysqli_close($conn);
     
 } catch (Exception $e) {
-    echo "<p style='color:red'>ERREUR: Exception: " . $e->getMessage() . "</p>";
+    die("<h1>Erreur</h1><p>" . $e->getMessage() . "</p>");
 }
 ?> 
