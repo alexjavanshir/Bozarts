@@ -57,7 +57,7 @@ class ProductDisplay {
         this.elements.image.src = `../assets/articles/article${this.productId}.jpg`;
         this.elements.image.alt = product.nom;
         this.elements.title.textContent = product.nom;
-        this.elements.reference.textContent = `Référence: ${product.reference}`;
+        this.elements.reference.textContent = `Catégorie: ${product.categorie}`;
         this.elements.description.textContent = product.description;
         this.elements.price.textContent = `${product.prix}€`;
         

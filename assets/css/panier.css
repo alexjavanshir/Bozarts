@@ -24,7 +24,6 @@
 .cart-item {
     display: flex;
     gap: 2.5rem;
-    /*background-color: var(--card-background, #fff);*/
     padding: 1.5rem;
     border-radius: var(--border-radius, 10px);
     box-shadow: var(--shadow, 0 2px 4px rgba(0,0,0,0.1));
@@ -119,11 +118,14 @@
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transform: scale(1);
+    transition: all 0.3s ease;
 }
 
 .checkout-button:hover {
     background-color: #d6611e;
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 
 @media (max-width: 768px) {

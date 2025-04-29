@@ -1,0 +1,181 @@
+/* Page Produit */
+.product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    border: 0px solid transparent;
+}
+.product-image img:hover {
+    border: 15px solid #f47f3b;
+}
+
+.product-info {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.product-info h1 {
+    color: #2b3e50;
+    margin-bottom: 1rem;
+}
+
+.reference {
+    color: #2b3e50;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: 2b3e50;
+    margin: 1rem 0;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.quantity-btn {
+    background-color: #2b3e50;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+/* Bouton "Ajouter au panier" */
+.add-to-cart {
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    display: flex;
+    border-radius: 10px;
+    background-color: var(--primary-color, #f47f3b);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 2rem;
+}
+
+
+/* Hover sur les boutons de quantité */
+.quantity-btn:hover {
+    background: #19242f;
+}
+
+.contact-seller {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    padding: 1rem;
+    background-color: #2b3e50;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.5s ease;
+}
+
+/* Hover sur le bouton "Envoyer un message à l'annonceur" */
+.contact-seller:hover {
+    background: #19242f;
+}
+
+.contact-seller:active {
+    transform: scale(0.95);
+    transition-duration: 0.5s;
+  }
+
+.CartBtn {
+    width: 220px;
+    height: 45px;
+    border-radius: 12px;
+    border: none;
+    background-color: #f47f3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 0px 0px transparent;
+}
+  
+.IconContainer {
+    position: absolute;
+    left: -50px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+  
+.icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+  
+.text {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 1;
+    transition: all 0.5s ease;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+.CartBtn:hover {
+    box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.303);
+}
+
+.CartBtn:hover .IconContainer {
+    transform: translateX(58px);
+    border-radius: 40px;
+}
+
+.CartBtn:hover .text {
+    transform: translate(10px,0px);
+}
+  
+.CartBtn:active {
+    transform: scale(0.95);
+    transition-duration: 0.5s;
+  }

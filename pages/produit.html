@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Détails du produit - Bozarts</title>
+    <link rel="stylesheet" href="../assets/css/produit.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
@@ -42,15 +43,16 @@
           <p class="reference" id="product-reference"></p>
           <p class="description" id="product-description"></p>
           <p class="price" id="product-price"></p>
-
           <div class="quantity-selector">
             <button class="quantity-btn minus">-</button>
             <input type="number" value="1" min="1" class="quantity-input">
             <button class="quantity-btn plus">+</button>
           </div>
-
-          <button class="add-to-cart">
-            Ajouter au panier
+          <button class="CartBtn">
+            <span class="IconContainer">
+              <img src="../assets/icons/panier-icon.png" alt="Panier" class="icon">
+            </span>
+            <span class="text">Ajouter au panier</span>
           </button>
         </div>
 

@@ -229,111 +229,6 @@ header {
     font-weight: bold;
 }
 
-/* Page Produit */
-.product-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
-.product-image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.product-info {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-}
-
-.product-info h1 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.reference {
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.price {
-    font-size: 1.5rem;
-    color: var(--secondary-color);
-    margin: 1rem 0;
-}
-
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.quantity-btn {
-    background-color: var(--secondary-color);
-    color: var(--white);
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 0.5rem;
-}
-/* Bouton "Ajouter au panier" */
-.add-to-cart {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    border-radius: 10px;
-}
-/* Hover sur le bouton "Ajouter au panier" */
-.add-to-cart:hover {
-    background: #d6611e;
-    transition: 0.2s ease;
-}
-
-/* Hover sur le bouton "Envoyer un message à l'annonceur" */
-.contact-seller:hover {
-    background: #19242f;
-    transition: 0.2s ease;
-}
-
-/* Hover sur les boutons de quantité */
-.quantity-btn:hover {
-    background: #19242f;
-    transition: 0.2s ease;
-}
-
-.contact-seller {
-    width: 100%;
-    padding: 1rem;
-    background-color: var(--secondary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
 /* FAQ */
 .faq-container {
     max-width: 800px;
@@ -468,7 +363,7 @@ footer {
   }
   
   .icon {
-    color: #ff914d;
+    color: var(--primary-color);
     font-size: 24px;
   }
   
@@ -532,7 +427,7 @@ footer {
   }
   
   .section-title {
-    color: #ff914d;
+    color: var(--primary-color);
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: bold;
@@ -546,12 +441,12 @@ footer {
   }
   
   .search-item {
-    background-color: #ff914d;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 15px;
     border-radius: 10px;
     white-space: nowrap;
-    border: 2px solid #ff914d;
+    border: 2px solid var(--primary-color);
   }
   
   .trending-items {
@@ -566,6 +461,9 @@ footer {
     border-radius: 15px;
     padding: 10px;
     margin-bottom: 15px;
+    transition: all 0.5s ease;
+    border: 0px solid transparent;
+    transform: scale(1);
   }
   
   .item-image {
@@ -573,25 +471,42 @@ footer {
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
-    border: 5px solid #ff914d;
+    transition: all 0.5s ease;
   }
   
+  .item-card:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.08);
+  }
+
   .faq-button {
-    background-color: #ff914d;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     border-radius: 10px;
     text-decoration: none;
+    transition: all 0.5s ease;
+    display: inline-block;
   }
-  
+
+  .faq-button:hover{
+    background-color: #d6611e;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-button:active{
+    transform: scale(0.95);
+  }
+
   #debug {
     margin-top: 30px;
     padding: 15px;
-    border: 1px dashed #ff914d;
+    border: 1px dashed var(--primary-color);
   }
   
   #debug h2 {
-    color: #ff914d;
+    color: var(--primary-color);
     margin-bottom: 10px;
   }
   
@@ -603,10 +518,10 @@ footer {
   }
   
   #debug ul li a {
-    color: #ff914d;
+    color: var(--primary-color);
     text-decoration: none;
     padding: 5px 10px;
-    border: 1px solid #ff914d;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
   }
   
@@ -615,5 +530,5 @@ footer {
     justify-content: space-between;
     padding: 15px 20px;
     margin-top: 30px;
-    color: #ff914d;
+    color: var(--primary-color);
   }
