@@ -2,10 +2,10 @@
     "sqltools.connections": [
         {
             "mysqlOptions": {
-                "authProtocol": "xprotocol",
+                "authProtocol": "default",
                 "enableSsl": "Disabled"
             },
-            "previewLimit": 50,
+            "previewLimit": 100,
             "server": "herogu.garageisep.com",
             "port": 3306,
             "driver": "MySQL",
