@@ -4,26 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon Profil - Bozarts</title>
+    <link rel="stylesheet" href="../assets/css/profil.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar">
-        <a href="../pages/index.html" class="logo">
-          <img src="../assets/icons/logo.png" alt="Bozarts" />
+      <div class="logo">
+        <a href="../pages/index.html" class="icon-button">
+          <img src="../assets/icons/LOGO.png" alt="BOZARTS" />
         </a>
-        <div class="nav-icons">
-          <a href="panier.html" class="icon-button">
-            <img src="../assets/icons/panier-icon.png" alt="Panier" />
-          </a>
-          <a href="#" class="icon-button">
-            <img src="../assets/icons/notifications-icon.png" alt="Notifications" />
-          </a>
-          <a href="profil.html" class="icon-button">
-            <img src="../assets/icons/profil-icon.png" alt="Profil" />
-          </a>
-        </div>
-      </nav>
+      </div>
+      <div class="search-container">
+        <form action="recherche.html" method="get">
+          <input type="text" name="search" class="search-box" placeholder="Rechercher" />
+          <button type="submit" class="search-button">
+            <img src="../assets/icons/search-icon.png" class="search-icon" alt="search icon" />
+          </button>
+        </form>
+      </div>
+      <div class="header-right">
+        <a href="panier.html" class="icon-button" style="width: 20%">
+          <img
+            src="../assets/icons/panier-icon.png"
+            alt="Panier"
+            class="icon-img"
+          />
+        </a>
+        <a href="mes-transactions.html" class="icon-button">
+          <img
+            src="../assets/icons/notifications-icon.png"
+            alt="Notifications"
+            class="icon-img"
+          />
+        </a>
+        <a href="connexion.html" class="icon-button">
+          <img
+            src="../assets/icons/profil-icon.png"
+            alt="Profil"
+            class="icon-img"
+          />
+        </a>
+      </div>
     </header>
 
     <main class="profile-container">
@@ -34,21 +55,45 @@
       </aside>
 
       <section class="profile-content">
-        <h1>MON PROFIL</h1>
+        <h1>Mon profil</h1>
         
         <div class="profile-info">
           <div class="info-group">
-            <label>Nom d'utilisateur :</label>
+            <label>Nom :</label>
             <div class="info-value">
-              <span>Henry45</span>
+              <span id="user_nom"></span>
               <button class="modify-button">Modifier</button>
             </div>
           </div>
 
           <div class="info-group">
-            <label>Age :</label>
+            <label>Prénom :</label>
             <div class="info-value">
-              <span>45</span>
+              <span id="user_prenom"></span>
+              <button class="modify-button">Modifier</button>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <label>E-mail :</label>
+            <div class="info-value">
+              <span id="user_email"></span>
+              <button class="modify-button">Modifier</button>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <label>Numéro de téléphone :</label>
+            <div class="info-value">
+              <span id="user_phone"></span>
+              <button class="modify-button">Modifier</button>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <label>Adresse :</label>
+            <div class="info-value">
+              <span id="user_adresse"></span>
               <button class="modify-button">Modifier</button>
             </div>
           </div>
@@ -56,7 +101,7 @@
           <div class="info-group">
             <label>Mot de passe :</label>
             <div class="info-value">
-              <span>********</span>
+              <span id="user_password">******</span>
               <button class="modify-button">Modifier</button>
             </div>
           </div>
@@ -64,7 +109,7 @@
           <div class="info-group">
             <label>Type de profil :</label>
             <div class="info-value">
-              <span>Vendeur</span>
+              <span id="user_type"></span>
               <button class="modify-button">Modifier</button>
             </div>
           </div>
@@ -77,5 +122,8 @@
         <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
       </div>
     </footer>
+
+    <script src="../js/profil.js"></script>
+
   </body>
 </html>

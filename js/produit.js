@@ -37,7 +37,7 @@ class ProductDisplay {
         }
 
         try {
-            const response = await fetch(`../includes/get_product.php?id=${this.productId}`);
+            const response = await fetch(`../includes/produit.php?id=${this.productId}`);
             const product = await response.json();
 
             if (product.error) {
