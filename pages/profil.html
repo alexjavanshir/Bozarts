@@ -63,6 +63,18 @@
             <div class="info-value">
               <span id="user_nom"></span>
               <button class="modify-button">Modifier</button>
+
+              <div class="modal-container" id ="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouveau nom</h1>
+                  <input type="text" id="new-nom"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="nom">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -71,6 +83,17 @@
             <div class="info-value">
               <span id="user_prenom"></span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouveau prénom</h1>
+                  <input type="text" id="new-prenom"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="prenom">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -79,6 +102,17 @@
             <div class="info-value">
               <span id="user_email"></span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouvel email</h1>
+                  <input type="email" id="new-email"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="email">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -87,6 +121,17 @@
             <div class="info-value">
               <span id="user_phone"></span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouveau numéro</h1>
+                  <input type="tel" id="new-phone"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="phone">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -95,6 +140,17 @@
             <div class="info-value">
               <span id="user_adresse"></span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouvelle adresse</h1>
+                  <input type="text" id="new-adresse"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="adresse">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -103,6 +159,17 @@
             <div class="info-value">
               <span id="user_password">******</span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Renseignez votre nouveau mot de passe</h1>
+                  <input type="password" id="new-password"/>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="password">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -111,9 +178,26 @@
             <div class="info-value">
               <span id="user_type"></span>
               <button class="modify-button">Modifier</button>
+              
+              <div class="modal-container">
+                <div class="modal">
+                  <h1>Choisissez votre type de profil</h1>
+                  <select id="new-type">
+                    <option value="client">client</option>
+                    <option value="artisan">artisan</option>
+                  </select>
+                  <div class="modal-buttons">
+                    <button class="save-button" data-field="type">Sauvegarder</button>
+                    <button class="close-button">Fermer</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      <div class="logout-container">
+        <button class="logout-button">Se déconnecter</button>
+      </div>
       </section>
     </main>
 
@@ -124,6 +208,7 @@
     </footer>
 
     <script src="../js/profil.js"></script>
+    <script src="../js/header.js"></script>
 
   </body>
 </html>
