@@ -4,7 +4,8 @@ Bozarts est une plateforme web permettant aux artisans et créateurs indépendan
 
 ## Fonctionnalités principales
 
-- **Inscription et connexion** pour les artisans
+- **Inscription et connexion** pour les artisans et clients
+- **Gestion de profil utilisateur** avec modification des informations personnelles
 - **Gestion des produits** : ajout, modification et suppression des créations
 - **Système de commandes** personnalisées
 - **Galerie virtuelle** pour découvrir les créations
@@ -18,29 +19,53 @@ Bozarts est une plateforme web permettant aux artisans et créateurs indépendan
 bozarts/
 ├── assets/
 │   ├── css/
-│   │   ├── style.css
-│   │   └── recherche.css
-│   │   └── form.css
-│   ├── js/
-│   │   ├── main.css
-│   │   └── recherche.js
-│   └── images/
+│   │   ├── style.css          # Styles généraux du site
+│   │   ├── profil.css         # Styles de la page profil
+│   │   ├── recherche.css      # Styles de la recherche
+│   │   └── form.css           # Styles des formulaires
+│   ├── icons/                 # Icônes du site
+│   ├── articles/              # Images des produits
+│   └── images/                # Autres images
 ├── config/
-│   └── database.php
+│   └── database.php           # Configuration de la base de données
 ├── includes/
-│   ├── register.php
-│   ├── login.php
-│   ├── add_product.php
-│   ├── add_event.php
-│   ├── place_order.php
-│   ├── add_review.php
-│   ├── search.php
-│   └── gallery.php
+│   ├── register.php           # Traitement de l'inscription
+│   ├── connexion.php          # Traitement de la connexion
+│   ├── check_session.php      # Vérification de session utilisateur
+│   ├── logout.php             # Déconnexion utilisateur
+│   ├── profil.php             # Récupération des données utilisateur
+│   ├── changer_profil.php     # Modification des informations utilisateur
+│   ├── add_product.php        # Ajout de produit
+│   ├── add_event.php          # Ajout d'événement
+│   ├── place_order.php        # Gestion des commandes
+│   ├── add_review.php         # Gestion des avis
+│   └── search.php             # Recherche de produits
+├── js/
+│   ├── profil.js              # Gestion de la page profil
+│   ├── header.js              # Gestion dynamique de l'en-tête
+│   └── recherche.js           # Fonctionnalités de recherche
+├── pages/
+│   ├── index.html             # Page d'accueil
+│   ├── connexion.html         # Page de connexion
+│   ├── inscription.html       # Page d'inscription
+│   ├── profil.html            # Page de profil utilisateur
+│   ├── mes-annonces.html      # Gestion des annonces de l'artisan
+│   ├── mes-transactions.html  # Suivi des transactions
+│   ├── panier.html            # Panier d'achat
+│   ├── produit.html           # Page produit
+│   └── recherche.html         # Page de recherche
 ├── database/
-│   └── init.sql
+│   └── init.sql               # Structure initiale de la base de données
 └── uploads/
-    └── products/
+    └── products/              # Dossier pour les images de produits uploadées
 ```
+
+## Fonctionnement de la gestion utilisateur
+
+- **Inscription/Connexion**: Les utilisateurs peuvent s'inscrire comme client ou artisan
+- **Session utilisateur**: Le système maintient la session utilisateur entre les pages
+- **Profil personnalisé**: Chaque utilisateur peut voir et modifier ses informations
+- **Types de profils**: Différenciation entre clients et artisans avec fonctionnalités adaptées
 
 ## Installation
 
@@ -65,10 +90,10 @@ git clone https://github.com/votre-username/bozarts.git
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (vanilla)
 - PHP 7.4+
 - MySQL
-- Apache/Nginx
+- MAMP/WAMP pour l'environnement de développement
 
 ## Contribution
 
