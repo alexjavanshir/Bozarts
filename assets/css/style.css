@@ -175,6 +175,56 @@ header {
     color: var(--secondary-color);
 }
 
+.join-us {
+  background-color: #fff6ec;
+  border: 3px solid var(--primary-color);
+  border-radius: 20px;
+  padding: 15px 30px;
+  margin-bottom: 40px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.join-us:hover {
+  transform: translateY(-5px);
+}
+
+.rejoindre-text p {
+  font-size: 18px;
+  color: var(--secondary-color);
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.join-button {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.join-button:hover {
+  background-color: #d6611e;
+  transform: scale(1.05);
+}
+
+
+.join-button:active {
+  transform: scale(0.95);
+}
+
+
 /* Footer */
 footer {
     display: flex;
@@ -411,32 +461,6 @@ footer {
 
   .faq-button:active{
     transform: scale(0.95);
-  }
-
-  #debug {
-    margin-top: 30px;
-    padding: 15px;
-    border: 1px dashed var(--primary-color);
-  }
-  
-  #debug h2 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
-  }
-  
-  #debug ul {
-    list-style: none;   
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  #debug ul li a {
-    color: var(--primary-color);
-    text-decoration: none;
-    padding: 5px 10px;
-    border: 1px solid var(--primary-color);
-    border-radius: 4px;
   }
   
   footer {
