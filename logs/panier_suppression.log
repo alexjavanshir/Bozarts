@@ -30,3 +30,83 @@ POST: Array
 Suppression du produit 4 pour l'utilisateur 7
 Résultat de la suppression: Succès
 Fin du script de suppression
+--------- 2025-05-02 12:45:00 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 2
+)
+
+Suppression du produit 2 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
+--------- 2025-05-02 12:45:00 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 5
+)
+
+Suppression du produit 5 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
+--------- 2025-05-02 12:46:20 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 3
+)
+
+Suppression du produit 3 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
+--------- 2025-05-02 12:46:46 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 4
+)
+
+Suppression du produit 4 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
+--------- 2025-05-02 12:46:47 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 5
+)
+
+Suppression du produit 5 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression

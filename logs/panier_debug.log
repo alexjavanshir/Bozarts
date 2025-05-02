@@ -288,3 +288,63 @@ Nombre de lignes trouvées: 0
 Insertion: INSERT INTO paniers (client_id, produit_id, quantite) VALUES (?, ?, ?)
 Résultat de l'insertion: Succès
 Redirection vers panier.html
+--------- 2025-05-02 12:45:03 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 3
+    [quantite] => 1
+)
+
+Client ID: 7, Produit ID: 3, Quantité: 1
+SQL préparé: SELECT quantite FROM paniers WHERE client_id = ? AND produit_id = ? avec client_id=7, produit_id=3
+Nombre de lignes trouvées: 0
+Insertion: INSERT INTO paniers (client_id, produit_id, quantite) VALUES (?, ?, ?)
+Résultat de l'insertion: Succès
+Redirection vers panier.html
+--------- 2025-05-02 12:46:40 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 4
+    [quantite] => 3
+)
+
+Client ID: 7, Produit ID: 4, Quantité: 3
+SQL préparé: SELECT quantite FROM paniers WHERE client_id = ? AND produit_id = ? avec client_id=7, produit_id=4
+Nombre de lignes trouvées: 0
+Insertion: INSERT INTO paniers (client_id, produit_id, quantite) VALUES (?, ?, ?)
+Résultat de l'insertion: Succès
+Redirection vers panier.html
+--------- 2025-05-02 12:46:43 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 5
+    [quantite] => 2
+)
+
+Client ID: 7, Produit ID: 5, Quantité: 2
+SQL préparé: SELECT quantite FROM paniers WHERE client_id = ? AND produit_id = ? avec client_id=7, produit_id=5
+Nombre de lignes trouvées: 0
+Insertion: INSERT INTO paniers (client_id, produit_id, quantite) VALUES (?, ?, ?)
+Résultat de l'insertion: Succès
+Redirection vers panier.html

@@ -62,9 +62,9 @@ class Panier {
             itemElement.className = 'cart-item';
             
             // Utiliser un chemin d'image de secours si image_url est vide
-            const imagePath = item.image_url ? 
-                `../assets/articles/${item.image_url}` : 
-                `../assets/articles/article${item.id}.jpg`;
+            const imagePath = `../assets/articles/article${item.id}.jpg` //item.image_url ? 
+                //`../assets/articles/${item.image_url}` : 
+                //`../assets/articles/article${item.id}.jpg`;
                 
             itemElement.innerHTML = `
                 <div class="item-image">
