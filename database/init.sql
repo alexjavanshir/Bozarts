@@ -52,19 +52,6 @@ CREATE TABLE IF NOT EXISTS commande_produits (
     FOREIGN KEY (produit_id) REFERENCES produits(id)
 );
 
--- Table des événements
-CREATE TABLE IF NOT EXISTS evenements (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    artisan_id INT,
-    titre VARCHAR(255) NOT NULL,
-    description TEXT,
-    date_debut DATETIME NOT NULL,
-    date_fin DATETIME NOT NULL,
-    lieu VARCHAR(255),
-    type VARCHAR(100), -- salon, atelier, exposition
-    FOREIGN KEY (artisan_id) REFERENCES utilisateurs(id)
-);
-
 
 -- Table des avis
 CREATE TABLE IF NOT EXISTS avis (
@@ -79,17 +66,6 @@ CREATE TABLE IF NOT EXISTS avis (
     FOREIGN KEY (client_id) REFERENCES utilisateurs(id),
     FOREIGN KEY (artisan_id) REFERENCES utilisateurs(id),
     FOREIGN KEY (produit_id) REFERENCES produits(id)
-);
-
--- Table pour la galerie virtuelle
-CREATE TABLE IF NOT EXISTS galerie (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    artisan_id INT,
-    titre VARCHAR(255) NOT NULL,
-    description TEXT,
-    image_url VARCHAR(255) NOT NULL,
-    date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (artisan_id) REFERENCES utilisateurs(id)
 );
 
 -- Table pour la messagerie
@@ -112,22 +88,12 @@ CREATE TABLE IF NOT EXISTS paniers (
     client_id INT NOT NULL,
     produit_id INT NOT NULL,
     quantite INT NOT NULL DEFAULT 1,
-    date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (client_id) REFERENCES utilisateurs(id),
     FOREIGN KEY (produit_id) REFERENCES produits(id),
     UNIQUE KEY unique_panier (client_id, produit_id)
 );
-
--- Table FAQ
-CREATE TABLE IF NOT EXISTS faq (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    question TEXT NOT NULL,
-    reponse TEXT NOT NULL,
-    categorie VARCHAR(100),
-    date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
 -- Insertion des données de test
+
 
 -- Insertion des clients
 INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, adresse, telephone) VALUES
