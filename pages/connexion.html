@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connexion - Bozarts</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/forms.css">
   </head>
   <body>
     <header>
@@ -21,19 +22,23 @@
         <form action="/Bozarts/includes/connexion.php" method="POST" class="connexion-form">
           <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required />
+            <input type="text" id="email" name="email" required placeholder="Votre e-mail"/>
           </div>
 
           <div class="form-group">
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" required placeholder="Votre mot de passe" />
+          </div>
+
+          <div class="form-links">
+            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
           </div>
 
           <button type="submit" class="form-submit">Connexion</button>
 
           <div class="form-links">
-            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
-            <a href="inscription.html" class="create-account">Pas encore de compte ?</a>
+            <label>Pas encore de compte ?</label>
+            <a href="inscription.html" class="create-account">Inscrivez vous</a>
           </div>
         </form>
       </div>

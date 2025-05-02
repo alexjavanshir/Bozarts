@@ -1,4 +1,105 @@
 /* Styles pour les formulaires */
+/* Formulaires */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.form-container h1 {
+    font-size: 35px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.form-container a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.inscription-form,
+.connexion-form {
+    background-color: var(--primary-color);
+    padding: 30px 20px;
+    border-radius: 10px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+}
+
+.inscription-form,
+.connexion-form:hover {
+    transform: translateY(-8px);
+}
+
+.inscription-form,
+.connexion-form:active {
+    transition-duration: 0.5s
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--background-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    font-size: 16px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    border: 2px solid var(--secondary-color);
+    cursor: pointer;
+}
+
+.form-submit {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.form-submit:hover {
+    background-color: var(--hover-color);
+}
+
+
 .form-group select {
     width: 100%;
     padding: 12px;

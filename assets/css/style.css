@@ -62,92 +62,6 @@ header {
     height: 30px;
 }
 
-/* Formulaires */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem auto;
-}
-
-.form-container h1 {
-    font-size: 35px;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.inscription-form,
-.connexion-form {
-    background-color: var(--primary-color);
-    padding: 30px 20px;
-    border-radius: 10px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 5px solid var(--secondary-color);
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    font-weight: bold;
-    color: var(--background-color);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 3px solid var(--secondary-color);
-    border-radius: 8px;
-    background-color: var(--background-color);
-    font-size: 16px;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-.checkbox-group label {
-    font-size: 14px;
-    color: var(--background-color);
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-.checkbox-group input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-    border-radius: 8px;
-    border: 2px solid var(--secondary-color);
-    cursor: pointer;
-}
-
-.form-submit {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-    width: 100%;
-}
-
-.form-submit:hover {
-    background-color: var(--hover-color);
-}
-
 /* Barre de recherche */
 .search-bar {
     display: flex;
@@ -191,10 +105,10 @@ header {
 }
 
 .rejoindre-text p {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--secondary-color);
-  margin-bottom: 20px;
-  max-width: 700px;
+  margin-bottom: 15px;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
