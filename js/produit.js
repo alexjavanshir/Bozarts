@@ -26,7 +26,9 @@ class ProductDisplay {
     // Récupère l'ID du produit depuis l'URL
     getProductIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('id');
+        const id = urlParams.get('id');
+        console.log("ID du produit récupéré de l'URL:", id);
+        return id;
     }
 
     // Charge les données du produit
@@ -89,11 +91,55 @@ class ProductDisplay {
         }
     }
 
-    // Ajoute au panier (à implémenter plus tard)
+    // Ajoute au panier
     addToCart() {
+        console.log("Méthode addToCart appelée");
         const quantity = parseInt(this.elements.quantityInput.value);
-        // TODO: Implémenter l'ajout au panier
-        alert(`Produit ajouté au panier (${quantity} unité(s))`);
+        const productId = this.productId;
+        
+        console.log("Données à envoyer:", {
+            produit_id: productId,
+            quantite: quantity
+        });
+
+        // Vérifier que les données sont valides
+        if (!productId || isNaN(productId) || productId <= 0) {
+            console.error("ID de produit invalide:", productId);
+            alert("ID de produit invalide. Veuillez réessayer.");
+            return;
+        }
+
+        if (!quantity || isNaN(quantity) || quantity <= 0) {
+            console.error("Quantité invalide:", quantity);
+            alert("Veuillez spécifier une quantité valide.");
+            return;
+        }
+
+        // Créer un formulaire pour envoyer les données
+        const formData = new FormData();
+        formData.append('produit_id', productId);
+        formData.append('quantite', quantity);
+
+        // Envoyer les données au serveur
+        fetch('../includes/ajouter_panier.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            console.log("Réponse reçue:", response);
+            if (response.ok) {
+                window.location.href = '../pages/panier.html';
+            } else {
+                return response.text().then(text => {
+                    console.error("Erreur réponse:", text);
+                    throw new Error('Erreur lors de l\'ajout au panier: ' + text);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue lors de l\'ajout au panier: ' + error.message);
+        });
     }
 
     // Affiche une erreur

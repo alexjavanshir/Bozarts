@@ -1,0 +1,32 @@
+--------- 2025-05-02 12:00:25 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 1
+)
+
+Suppression du produit 1 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
+--------- 2025-05-02 12:00:30 ---------
+Session: Array
+(
+    [user_id] => 7
+    [user_type] => client
+    [user_email] => a@a.com
+)
+
+POST: Array
+(
+    [produit_id] => 4
+)
+
+Suppression du produit 4 pour l'utilisateur 7
+Résultat de la suppression: Succès
+Fin du script de suppression
