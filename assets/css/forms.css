@@ -19,7 +19,6 @@
     text-decoration: none;
 }
 
-.inscription-form,
 .connexion-form {
     background-color: var(--primary-color);
     padding: 30px 20px;
@@ -32,12 +31,10 @@
     transition: all 0.5s ease;
 }
 
-.inscription-form,
 .connexion-form:hover {
     transform: translateY(-8px);
 }
 
-.inscription-form,
 .connexion-form:active {
     transition-duration: 0.5s
 }
@@ -64,13 +61,13 @@
 
 .checkbox-group {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     margin: 10px 0;
 }
 
 .checkbox-group label {
-    font-size: 14px;
+    font-weight: 100;
+    font-size: 16px;
     text-decoration: none;
 }
 
