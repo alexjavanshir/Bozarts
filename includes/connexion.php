@@ -14,20 +14,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST["password"]) ? trim($_POST["password"]) : null;
 
     if (empty($email) || empty($password)) {
-        $error = "Veuillez remplir tous les champs.";
+        // Réponse JSON pour l'erreur
+        echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs.']);
+        exit();
     } else {
         // Requête préparée correcte
         $sql = "SELECT * FROM utilisateurs WHERE email = ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
-            throw new Exception("Erreur de préparation de la requête : " . $conn->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur de préparation de la requête.']);
+            exit();
         }
 
         // Bind du paramètre email
         $stmt->bind_param("s", $email);
         
         if (!$stmt->execute()) {
-            throw new Exception("Erreur d'exécution de la requête : " . $stmt->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur d\'exécution de la requête.']);
+            exit();
         }
         
         $result = $stmt->get_result();
@@ -40,17 +44,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_type'] = $user['type'];
                 $_SESSION['user_email'] = $user['email'];
                 
-                // Redirection selon le type d'utilisateur
-                header("Location: ../pages/profil.html?id=" . $_SESSION['user_id']);
-
+                // Réponse JSON de succès
+                echo json_encode([
+                    'success' => true, 
+                    'redirect' => '../pages/profil.html?id=' . $_SESSION['user_id']
+                ]);
                 exit();
             } else {
-                $error = "Email ou mot de passe incorrect.";
-                echo "<h1>$error<h1>";
+                echo json_encode(['success' => false, 'message' => 'Email ou mot de passe incorrect.']);
+                exit();
             }
         } else {
-            $error = "Email ou mot de passe incorrect.";
-            echo "<h1>$error<h1>";
+            echo json_encode(['success' => false, 'message' => 'Email ou mot de passe incorrect.']);
+            exit();
         }
     }
 }

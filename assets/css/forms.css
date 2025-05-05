@@ -146,4 +146,18 @@
 
 .form-group textarea::placeholder {
     color: #999;
-} 
+}
+
+.error-message {
+    color: #c00000;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background-color: #ffe0e0;
+    border: 1px solid #ff8080;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px -3px #111;
+  }
