@@ -83,7 +83,7 @@ class Panier {
 
     updateSummary(total) {
         const fraisLivraison = total > 0 ? 10 : 0;
-        const totalAvecLivraison = total + fraisLivraison;
+        const totalAvecLivraison = Math.round((total + fraisLivraison) * 100) / 100;
 
         this.elements.cartSummary.innerHTML = `
             <h2>Total</h2>

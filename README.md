@@ -36,7 +36,6 @@ bozarts/
 │   ├── profil.php             # Récupération des données utilisateur
 │   ├── changer_profil.php     # Modification des informations utilisateur
 │   ├── add_product.php        # Ajout de produit
-│   ├── add_event.php          # Ajout d'événement
 │   ├── place_order.php        # Gestion des commandes
 │   ├── add_review.php         # Gestion des avis
 │   └── search.php             # Recherche de produits

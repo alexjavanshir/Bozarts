@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     connexionForm.insertBefore(errorContainer, submitButton);
     
     connexionForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Empêche le formulaire de s'envoyer avant de vérifier les données
         
         // Masquer le message d'erreur précédent s'il existe
         errorContainer.style.display = 'none';
@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Désactiver le bouton pendant la requête
         submitButton.disabled = true;
         submitButton.textContent = 'Connexion en cours...';
+
         
-        fetch('../includes/connexion.php', {
+        fetch('../includes/connexion.php', { // Requête AJAX vers le serveur (sans recharger la page)
             method: 'POST',
             body: formData
         })
