@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajouter un produit - Bozarts</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/forms.css" />
+    <style>
+      body {
+        background-color: #fef5ec;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header,
+      footer {
+        background-color: #fef5ec;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar img {
+        height: 50px;
+      }
+
+      .sidebar {
+        width: 200px;
+        padding: 20px;
+      }
+
+      .sidebar button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .sidebar .active {
+        background-color: #f47d31;
+      }
+
+      .sidebar .inactive {
+        background-color: #1e2c3a;
+      }
+
+      main {
+        display: flex;
+        padding: 40px;
+        gap: 40px;
+      }
+
+      .form-section {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        border: 3px solid #1e2c3a;
+        flex-grow: 1;
+      }
+
+      .form-section h2 {
+        color: #f47d31;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #000000;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        color: #1e2c3a;
+      }
+
+      .form-submit {
+        background-color: #f47d31;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #f47d31;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/icons/logo.png" alt="Bozarts" />
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <aside class="sidebar">
+        <button class="active">Ajouter un produit</button>
+        <button class="inactive">Mes annonces</button>
+        <button class="inactive">Mes transactions</button>
+      </aside>
+
+      <section class="form-section">
+        <h2>AJOUTER UN PRODUIT</h2>
+        <form action="includes/ajouter-produit.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" required />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="prix">Prix (€)</label>
+            <input type="number" id="prix" name="prix" step="0.01" required />
+          </div>
+
+          <div class="form-group">
+            <label for="image_url">Image</label>
+            <input type="file" id="image_url" name="image_url" accept="image/*" required />
+          </div>
+
+          <div class="form-group">
+            <label for="categorie">Catégorie</label>
+            <input type="text" id="categorie" name="categorie" required />
+          </div>
+
+          <button type="submit" class="form-submit">Valider</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Bozarts. Tous droits réservés.</p>
+    </footer>
+  </body>
+</html>
