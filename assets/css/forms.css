@@ -19,7 +19,7 @@
     text-decoration: none;
 }
 
-.connexion-form {
+.connexion-form, .inscription-form {
     background-color: var(--primary-color);
     padding: 30px 20px;
     border-radius: 10px;
@@ -31,11 +31,11 @@
     transition: all 0.5s ease;
 }
 
-.connexion-form:hover {
+.connexion-form:hover, .inscription-form:hover {
     transform: translateY(-8px);
 }
 
-.connexion-form:active {
+.connexion-form:active, .inscription-form:active {
     transition-duration: 0.5s
 }
 
