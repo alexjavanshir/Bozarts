@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Récupérer l'élément de profil dans le header
-    const profileLink = document.querySelector('a.icon-button img[alt="Profil"]').parentNode;
+    // Récupérer l'élément de notifications dans le header
+    const notificationsLink = document.querySelector('a.icon-button img[alt="Notifications"]').parentNode;
     
     // Fonction pour vérifier la session et mettre à jour le lien
     function checkSessionAndUpdateLink() {
@@ -15,22 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.error) {
                     // Utilisateur non connecté
-                    profileLink.href = 'connexion.html';
+                    notificationsLink.href = 'connexion.html';
                     console.log('Utilisateur non connecté, lien vers connexion.html');
                 } else {
                     // Utilisateur connecté, rediriger selon le type
                     if (userType === 'artisan') {
-                        profileLink.href = 'mes-annonces.html';
+                        notificationsLink.href = 'mes-annonces.html';
                         console.log('Utilisateur artisan, lien vers mes-annonces.html');
                     } else {
-                        profileLink.href = 'mes-transactions.html';
+                        notificationsLink.href = 'mes-transactions.html';
                         console.log('Utilisateur client, lien vers mes-transactions.html');
                     }
                 }
             })
             .catch(error => {
                 // En cas d'erreur, rediriger vers la connexion
-                profileLink.href = 'connexion.html';
+                notificationsLink.href = 'connexion.html';
                 console.error('Erreur:', error);
             });
     }
@@ -38,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Vérifier la session au chargement de la page
     checkSessionAndUpdateLink();
     
-    // Ajouter un événement click sur le lien de profil
-    profileLink.addEventListener('click', function(event) {
+    // Ajouter un événement click sur le lien de notifications
+    notificationsLink.addEventListener('click', function(event) {
         event.preventDefault();
-        console.log('Clic sur le lien profil');
+        console.log('Clic sur le lien notifications');
         
         fetch('../includes/check_session.php')
             .then(response => response.json())
