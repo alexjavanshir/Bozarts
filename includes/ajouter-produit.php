@@ -23,17 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prix = $_POST['prix'] ?? 0;
     $categorie = $_POST['categorie'] ?? '';
 
-    // Validation des données
-    $errors = [];
-    if (empty($nom)) $errors[] = "Le nom du produit est requis";
-    if (empty($description)) $errors[] = "La description est requise";
-    if (empty($prix) || !is_numeric($prix)) $errors[] = "Le prix doit être un nombre valide";
-    if (empty($categorie)) $errors[] = "La catégorie est requise";
-
-    if (empty($errors)) {
-        // Gestion de l'image (upload)
-        if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = '../assets/images/';
+    // Gestion de l'image (upload)
+    if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'uploads/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0755, true); // Création du dossier s’il n’existe pas
+        }
 
             $fileTmpPath = $_FILES['image_url']['tmp_name'];
             $fileName = basename($_FILES['image_url']['name']);
@@ -48,43 +43,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $targetFilePath = $uploadDir . uniqid() . '-' . $fileName;
 
-            if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
-                // Chemin relatif pour la base de données
-                $dbFilePath = str_replace('../', '', $targetFilePath);
-                
-                // Requête d'insertion
-                $sql = "INSERT INTO produits (artisan_id, nom, description, prix, categorie)
-                        VALUES (:artisan_id, :nom, :description, :prix, :image_url, :categorie)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([
-                    ':artisan_id' => $_SESSION['user_id'],
-                    ':nom' => $nom,
-                    ':description' => $description,
-                    ':prix' => $prix,
-                    ':categorie' => $categorie
-                ]);
+        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+            // 3. Requête d'insertion
+            $sql = "INSERT INTO produits (nom, description, prix, image_url, categorie)
+                    VALUES (:nom, :description, :prix, :image_url, :categorie)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':nom' => $nom,
+                ':description' => $description,
+                ':prix' => $prix,
+                ':image_url' => $targetFilePath,
+                ':categorie' => $categorie
+            ]);
 
-                // Redirection vers la page des annonces
-                header('Location: ../pages/mes-annonces.html?success=1');
-                exit;
-            } else {
-                echo "Erreur lors du téléchargement de l'image.";
-            }
+            echo "Produit ajouté avec succès !";
         } else {
-            echo "Image manquante ou incorrecte.";
+            echo "Erreur lors du téléchargement de l'image.";
         }
     } else {
-        // Afficher les erreurs
-        echo "<div class='error-message'>";
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-        echo "</div>";
-        echo "<a href='../pages/ajouter-produit.html'>Retour au formulaire</a>";
+        echo "Image manquante ou incorrecte.";
     }
 } else {
-    // Redirection vers le formulaire si accès direct
-    header('Location: ../pages/ajouter-produit.html');
-    exit;
+    echo "Méthode non autorisée.";
 }
 ?>

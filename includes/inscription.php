@@ -4,32 +4,57 @@ ini_set('display_errors', 1);
 
 require_once "../config/database.php";
 
+// Fonction pour valider le mot de passe
+function validatePassword($password) {
+    // Vérifier la longueur minimale
+    if (strlen($password) < 8) {
+        return false;
+    }
+    
+    // Vérifier la présence d'au moins un caractère spécial
+    if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+/', $password)) {
+        return false;
+    }
+    
+    return true;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm-password'];
 
-        // Validation
+        // Validation de la correspondance des mots de passe
         if ($password !== $confirm_password) {
-            throw new Exception("Les mots de passe ne correspondent pas!");
+            echo json_encode(['success' => false, 'message' => 'Les mots de passe ne correspondent pas!']);
+            exit();
+        }
+        
+        // Validation de la complexité du mot de passe
+        if (!validatePassword($password)) {
+            echo json_encode(['success' => false, 'message' => 'Le mot de passe doit contenir au moins 8 caractères et un caractère spécial.']);
+            exit();
         }
 
         // Vérifier si l'email existe déjà
         $check_email = "SELECT id FROM utilisateurs WHERE email = ?";
         $stmt = $conn->prepare($check_email);
         if (!$stmt) {
-            throw new Exception("Erreur de préparation de la requête : " . $conn->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur de préparation de la requête.']);
+            exit();
         }
         
         $stmt->bind_param("s", $email);
         if (!$stmt->execute()) {
-            throw new Exception("Erreur d'exécution de la requête : " . $stmt->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur d\'exécution de la requête.']);
+            exit();
         }
         
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            throw new Exception("Cet email est déjà utilisé.");
+            echo json_encode(['success' => false, 'message' => 'Cet email est déjà utilisé.']);
+            exit();
         }
 
         // Hasher le mot de passe
@@ -39,12 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO utilisateurs (email, mot_de_passe, type, nom, prenom) VALUES (?, ?, 'client', 'À compléter', 'À compléter')";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
-            throw new Exception("Erreur de préparation de la requête : " . $conn->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur de préparation de la requête d\'insertion.']);
+            exit();
         }
         
         $stmt->bind_param("ss", $email, $hashed_password);
         if (!$stmt->execute()) {
-            throw new Exception("Erreur d'exécution de la requête : " . $stmt->error);
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la création du compte.']);
+            exit();
         }
 
         $user_id = $stmt->insert_id;
@@ -54,16 +81,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
         }
         $_SESSION['user_id'] = $user_id;
+        $_SESSION['user_type'] = 'client';
+        $_SESSION['user_email'] = $email;
         
-        // Redirection vers completer-profil.html
-        header("Location: http://localhost/Bozarts/pages/completer-profil.html");
+        // Réponse JSON de succès
+        echo json_encode([
+            'success' => true, 
+            'redirect' => '../pages/completer-profil.html'
+        ]);
         exit();
     } catch (Exception $e) {
-        die("Erreur : " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erreur: ' . $e->getMessage()]);
+        exit();
     }
 } else {
-    // Si ce n'est pas une requête POST, rediriger vers la page d'inscription
-    header("Location: ../pages/inscription.html");
+    // Si ce n'est pas une requête POST, envoyer une erreur JSON
+    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
     exit();
 }
 ?>
