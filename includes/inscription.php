@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0); // Désactiver l'affichage des erreurs pour éviter qu'elles contaminent le JSON
 
 require_once "../config/database.php";
 
@@ -99,4 +99,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
     exit();
 }
-?>

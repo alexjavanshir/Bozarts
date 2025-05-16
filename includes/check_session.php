@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Désactiver l'affichage des erreurs
+
 session_start();
 require_once '../config/database.php';
 
@@ -26,5 +29,4 @@ if (isset($_SESSION['user_id'])) {
     mysqli_stmt_close($stmt);
 } else {
     echo json_encode(['error' => 'Non connecté']);
-}
-?> 
+} 

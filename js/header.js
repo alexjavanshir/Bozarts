@@ -15,6 +15,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             profileLink.href = 'connexion.html';
         }
     } catch (error) {
-        console.error('Erreur lors de la vérification de la session:', error);
+        console.error(error);
     }
 });

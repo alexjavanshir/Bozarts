@@ -1,5 +1,7 @@
 <?php
-define('DB_SERVER', 'localhost');
+error_reporting(E_ALL);
+
+define('DB_SERVER', 'localhost:8889');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_NAME', 'bozarts');
@@ -15,6 +17,13 @@ try {
     // Les scripts PHP ferment automatiquement les connexions à la fin de leur exécution
     
 } catch (Exception $e) {
-    die($e->getMessage());
+    // Au lieu de tuer le script, retournons une erreur JSON si c'est une requête AJAX
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Erreur de connexion à la base de données: ' . $e->getMessage()]);
+        exit();
+    } else {
+        die($e->getMessage());
+    }
 }
 ?>
