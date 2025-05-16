@@ -1,56 +1,90 @@
 <?php
-// 1. Connexion à la base de données
-$host = 'localhost';
-$dbname = 'nom_de_ta_base';  // remplace par le vrai nom
-$username = 'root';          // ou autre identifiant
-$password = '';              // mot de passe si besoin
+session_start();
+require_once '../config/database.php';
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../pages/connexion.html');
+    exit;
+}
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    // Utiliser les constantes définies dans database.php
+    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset=utf8", DB_USERNAME, DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
 
-// 2. Vérification que les champs sont bien envoyés
+// Vérification que les champs sont bien envoyés
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'] ?? '';
     $description = $_POST['description'] ?? '';
     $prix = $_POST['prix'] ?? 0;
     $categorie = $_POST['categorie'] ?? '';
 
-    // Gestion de l'image (upload)
-    if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0755, true); // Création du dossier s’il n’existe pas
-        }
+    // Validation des données
+    $errors = [];
+    if (empty($nom)) $errors[] = "Le nom du produit est requis";
+    if (empty($description)) $errors[] = "La description est requise";
+    if (empty($prix) || !is_numeric($prix)) $errors[] = "Le prix doit être un nombre valide";
+    if (empty($categorie)) $errors[] = "La catégorie est requise";
 
-        $fileTmpPath = $_FILES['image_url']['tmp_name'];
-        $fileName = basename($_FILES['image_url']['name']);
-        $targetFilePath = $uploadDir . uniqid() . '-' . $fileName;
+    if (empty($errors)) {
+        // Gestion de l'image (upload)
+        if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = '../assets/images/';
 
-        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
-            // 3. Requête d'insertion
-            $sql = "INSERT INTO produits (nom, description, prix, image_url, categorie)
-                    VALUES (:nom, :description, :prix, :image_url, :categorie)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                ':nom' => $nom,
-                ':description' => $description,
-                ':prix' => $prix,
-                ':image_url' => $targetFilePath,
-                ':categorie' => $categorie
-            ]);
+            $fileTmpPath = $_FILES['image_url']['tmp_name'];
+            $fileName = basename($_FILES['image_url']['name']);
+            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+            
+            // Vérifier que c'est bien une image
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
+                echo "Le fichier doit être une image (jpg, jpeg, png ou gif).";
+                exit;
+            }
+            
+            $targetFilePath = $uploadDir . uniqid() . '-' . $fileName;
 
-            echo "Produit ajouté avec succès !";
+            if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+                // Chemin relatif pour la base de données
+                $dbFilePath = str_replace('../', '', $targetFilePath);
+                
+                // Requête d'insertion
+                $sql = "INSERT INTO produits (artisan_id, nom, description, prix, categorie)
+                        VALUES (:artisan_id, :nom, :description, :prix, :image_url, :categorie)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':artisan_id' => $_SESSION['user_id'],
+                    ':nom' => $nom,
+                    ':description' => $description,
+                    ':prix' => $prix,
+                    ':categorie' => $categorie
+                ]);
+
+                // Redirection vers la page des annonces
+                header('Location: ../pages/mes-annonces.html?success=1');
+                exit;
+            } else {
+                echo "Erreur lors du téléchargement de l'image.";
+            }
         } else {
-            echo "Erreur lors du téléchargement de l'image.";
+            echo "Image manquante ou incorrecte.";
         }
     } else {
-        echo "Image manquante ou incorrecte.";
+        // Afficher les erreurs
+        echo "<div class='error-message'>";
+        foreach ($errors as $error) {
+            echo $error . "<br>";
+        }
+        echo "</div>";
+        echo "<a href='../pages/ajouter-produit.html'>Retour au formulaire</a>";
     }
 } else {
-    echo "Méthode non autorisée.";
+    // Redirection vers le formulaire si accès direct
+    header('Location: ../pages/ajouter-produit.html');
+    exit;
 }
 ?>
