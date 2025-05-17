@@ -1,4 +1,3 @@
-
 -- Table des utilisateurs (artisans)
 CREATE TABLE IF NOT EXISTS utilisateurs (
     id INT AUTO_INCREMENT PRIMARY KEY,

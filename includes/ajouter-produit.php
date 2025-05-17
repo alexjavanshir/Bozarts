@@ -18,16 +18,22 @@ try {
 
 // Vérification que les champs sont bien envoyés
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Debug: Afficher l'ID de l'artisan
+    error_log("Session user_id: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'non défini'));
+    
     $nom = $_POST['nom'] ?? '';
     $description = $_POST['description'] ?? '';
     $prix = $_POST['prix'] ?? 0;
     $categorie = $_POST['categorie'] ?? '';
 
+    // Debug: Afficher les données reçues
+    error_log("Données reçues - Nom: $nom, Description: $description, Prix: $prix, Catégorie: $categorie");
+
     // Gestion de l'image (upload)
     if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
+        $uploadDir = '/assets/articles';
         if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0755, true); // Création du dossier s’il n’existe pas
+            mkdir($uploadDir, 0755, true); // Création du dossier s'il n'existe pas
         }
 
             $fileTmpPath = $_FILES['image_url']['tmp_name'];
@@ -45,18 +51,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
             // 3. Requête d'insertion
-            $sql = "INSERT INTO produits (nom, description, prix, image_url, categorie)
-                    VALUES (:nom, :description, :prix, :image_url, :categorie)";
+            $sql = "INSERT INTO produits (nom, description, prix, image_url, categorie, artisan_id)
+                    VALUES (:nom, :description, :prix, :image_url, :categorie, :artisan_id)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':nom' => $nom,
                 ':description' => $description,
                 ':prix' => $prix,
                 ':image_url' => $targetFilePath,
-                ':categorie' => $categorie
+                ':categorie' => $categorie,
+                ':artisan_id' => $_SESSION['user_id']
             ]);
 
-            echo "Produit ajouté avec succès !";
+            // Debug: Vérifier si l'insertion a réussi
+            error_log("Produit ajouté avec succès. ID: " . $pdo->lastInsertId());
+
+            // Rediriger vers la page mes-annonces après l'ajout réussi
+            header('Location: ../pages/mes-annonces.html');
+            exit;
         } else {
             echo "Erreur lors du téléchargement de l'image.";
         }

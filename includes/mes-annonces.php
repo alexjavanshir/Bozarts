@@ -18,6 +18,10 @@ try {
     $stmt->execute([':artisan_id' => $_SESSION['user_id']]);
     $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // Debug: Afficher l'ID de l'artisan et le nombre de produits trouvés
+    error_log("Artisan ID: " . $_SESSION['user_id']);
+    error_log("Nombre de produits trouvés: " . count($produits));
+
     // Si aucun produit
     if (empty($produits)) {
         echo '<p class="no-products">Vous n\'avez pas encore ajouté de produits.</p>';

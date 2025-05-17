@@ -14,7 +14,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <div class="rejoindre-text">
                         <p>En tant qu'artisan, vous pouvez ajouter vos créations à la plateforme et les proposer à la vente.</p>
                     </div>
-                    <a href="ajouter-produit.html" class="join-button">Ajouter un article</a>
+                    <div class="artisan-buttons">
+                        <a href="ajouter-produit.html" class="join-button">Ajouter un article</a>
+                        <a href="mes-annonces.html" class="join-button">Mes annonces</a>
+                    </div>
                 `;
             }
             else if (data.type === 'client') {
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 joinUsSection.innerHTML = `
                     <h2 class="section-title">Bienvenue sur Bozarts !</h2>
                     <div class="rejoindre-text">
-                        <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l’art sous toutes ses formes.</p>
+                        <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l'art sous toutes ses formes.</p>
                     </div>
                     <a href="../pages/recherche.html?search=+" class="join-button">Découvrir</a>
                 `;
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 joinUsSection.innerHTML = ` 
                 <h2 class="section-title">Bienvenue sur Bozarts - NON CONNCETE!</h2>
                 <div class="rejoindre-text">
-                    <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l’art sous toutes ses formes.</p>
+                    <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l'art sous toutes ses formes.</p>
                 </div>
                 <a href="../pages/recherche.html?search=+" class="join-button">Découvrir</a>
             `;

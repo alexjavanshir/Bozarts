@@ -1,8 +1,12 @@
 // Fonction pour charger les produits
 function chargerProduits() {
     fetch('../includes/mes-annonces.php')
-        .then(response => response.text())
+        .then(response => {
+            console.log('Réponse du serveur:', response);
+            return response.text();
+        })
         .then(html => {
+            console.log('HTML reçu:', html);
             document.getElementById('products-container').innerHTML = html;
             // Ajouter les écouteurs d'événements pour les boutons de suppression
             document.querySelectorAll('.delete-button').forEach(button => {

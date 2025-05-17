@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mes Annonces</title>
+    <title>Messagerie - Bozarts</title>
+    <link rel="stylesheet" href="../assets/css/messagerie.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/mes-annonces.css" />
   </head>
   <body>
     <header>
@@ -37,7 +37,7 @@
             class="icon-img"
           />
         </a>
-        <a href="connexion.html" class="icon-button" id="profile-link">
+        <a href="connexion.html" class="icon-button">
           <img
             src="../assets/icons/profil-icon.png"
             alt="Profil"
@@ -47,14 +47,34 @@
       </div>
     </header>
 
-    <main>
-      <section id="section-title">
-        <h1>Mes Annonces</h1>
-        <p>Des créations qui racontent une histoire.</p>
+    <main class="messagerie-container">
+      <section class="messages-list">
+        <h2>Conversations</h2>
+        <div class="search-messages">
+          <input type="text" id="search-conversations" placeholder="Rechercher une conversation...">
+        </div>
+        <div id="conversations-list">
+          <!-- Les conversations seront chargées ici dynamiquement -->
+        </div>
       </section>
 
-      <section class="products-grid" id="products-container">
-        <!-- Le contenu sera chargé dynamiquement via JavaScript -->
+      <section class="message-content">
+        <div class="message-header">
+          <h2 id="current-conversation-title">Sélectionnez une conversation</h2>
+        </div>
+        <div class="messages-container" id="messages-container">
+          <!-- Les messages seront chargés ici dynamiquement -->
+        </div>
+        <form id="message-form" class="message-form">
+          <input type="hidden" id="destinataire_id" name="destinataire_id">
+          <div class="form-group">
+            <input type="text" id="sujet" name="sujet" placeholder="Sujet du message" required>
+          </div>
+          <div class="form-group">
+            <textarea id="contenu" name="contenu" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="send-button">Envoyer</button>
+        </form>
       </section>
     </main>
 
@@ -66,6 +86,6 @@
     </footer>
 
     <script src="../js/header.js"></script>
-    <script src="../js/mes-annonces.js"></script>
+    <script src="../js/messagerie.js"></script>
   </body>
-</html>
+</html> 

@@ -16,7 +16,8 @@ class ProductDisplay {
             quantityInput: document.querySelector('.quantity-input'),
             minusBtn: document.querySelector('.quantity-btn.minus'),
             plusBtn: document.querySelector('.quantity-btn.plus'),
-            addToCartBtn: document.querySelector('.add-to-cart')
+            addToCartBtn: document.querySelector('.add-to-cart'),
+            contactSellerBtn: document.querySelector('.contact-seller')
         };
 
         // Initialiser les écouteurs d'événements
@@ -64,6 +65,11 @@ class ProductDisplay {
         this.elements.price.textContent = `${product.prix}€`;
         
         document.title = `${product.nom} - Bozarts`;
+
+        // Ajouter l'ID du vendeur au bouton de contact
+        this.elements.contactSellerBtn.onclick = () => {
+            window.location.href = `messagerie.html?vendeur_id=${product.artisan_id}`;
+        };
     }
 
     // Initialise les écouteurs d'événements
