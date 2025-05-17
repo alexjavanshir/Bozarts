@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Gestion de l'image (upload)
     if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = '/assets/articles';
+        $uploadDir = '../assets/articles/';
         if (!file_exists($uploadDir)) {
             mkdir($uploadDir, 0755, true); // Création du dossier s'il n'existe pas
         }
