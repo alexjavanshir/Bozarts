@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mon Panier - Bozarts</title>
-    <link rel="stylesheet" href="../assets/css/panier.css" />
+    <title>Bozarts</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
-
+    <base href="../pages/index.html" />
   </head>
   <body>
     <header>
@@ -38,7 +37,7 @@
             class="icon-img"
           />
         </a>
-        <a href="connexion.html" class="icon-button">
+        <a href="connexion.html" class="icon-button" id="profile-link">
           <img
             src="../assets/icons/profil-icon.png"
             alt="Profil"
@@ -48,32 +47,12 @@
       </div>
     </header>
 
-    <main class="cart-container">
-      <h1>Mon panier</h1>
+    <main>
+      <section>
+        <h2 class="section-title">CGU et mentions légals</h2>
+      </section>
 
-      <div class="cart-content">
-        <!-- Cart items will be loaded here -->
-        <div class="cart-items"></div>
 
-        <div class="cart-summary">
-          <h2>Total</h2>
-          <div class="summary-details">
-            <div class="summary-line">
-              <span>Sous-Total :</span>
-              <span><!----></span>
-            </div>
-            <div class="summary-line">
-              <span>Livraison :</span>
-              <span>0€</span>
-            </div>
-            <div class="summary-line total">
-              <span>Total :</span>
-              <span>0€</span>
-            </div>
-            <button class="checkout-button">Paiement</button>
-          </div>
-        </div>
-      </div>
     </main>
 
     <footer>
@@ -85,6 +64,5 @@
     </footer>
 
     <script src="../js/header.js"></script>
-    <script src="../js/panier.js"></script>
   </body>
 </html>
