@@ -6,6 +6,37 @@
     <title>Questions Fréquentes - Bozarts</title>
     <link rel="stylesheet" href="../assets/css/faq.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <style>
+      .admin-edit {
+        display: none;
+        margin: 20px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .admin-edit.active {
+        display: block;
+      }
+      .admin-edit textarea {
+        width: 100%;
+        min-height: 400px;
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .admin-edit button {
+        background-color: #f47f3b;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .admin-edit button:hover {
+        background-color: #e66d2a;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -51,11 +82,17 @@
       <h1>Questions fréquentes</h1>
 
       <div class="faq-search">
-        <p>Recherchez plus facilement votre réponse</p>
+        <p>Recherchez plus facilement vos réponses</p>
         <div class="search-bar">
           <input type="text" placeholder="Rechercher..." />
           <button class="close-search">×</button>
         </div>
+      </div>
+
+      <div class="admin-edit" id="adminEdit">
+        <h2>Édition de la FAQ</h2>
+        <textarea id="faqContent"></textarea>
+        <button onclick="saveFAQ()">Enregistrer les modifications</button>
       </div>
 
       <div class="faq-content">
@@ -190,6 +227,62 @@
     </footer>
 
     <script src="../js/header.js"></script>
-    <script src="../js/faq.js"></script>
+    <script>
+      // Vérifier si l'utilisateur est admin
+      async function checkAdmin() {
+        try {
+          const response = await fetch('../includes/check_session.php');
+          const data = await response.json();
+          
+          if (data.droit === 'admin') {
+            document.getElementById('adminEdit').classList.add('active');
+            loadFAQForEdit();
+          }
+        } catch (error) {
+          console.error('Erreur:', error);
+        }
+      }
+
+      // Charger le contenu de la FAQ pour l'édition
+      async function loadFAQForEdit() {
+        try {
+          const response = await fetch('faq.html');
+          const content = await response.text();
+          document.getElementById('faqContent').value = content;
+        } catch (error) {
+          console.error('Erreur:', error);
+        }
+      }
+
+      // Sauvegarder les modifications
+      async function saveFAQ() {
+        const content = document.getElementById('faqContent').value;
+        
+        try {
+          const response = await fetch('../includes/update_faq.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content })
+          });
+
+          const data = await response.json();
+          
+          if (data.success) {
+            alert('FAQ mise à jour avec succès !');
+            location.reload();
+          } else {
+            alert('Erreur lors de la mise à jour de la FAQ');
+          }
+        } catch (error) {
+          console.error('Erreur:', error);
+          alert('Erreur lors de la mise à jour de la FAQ');
+        }
+      }
+
+      // Vérifier le statut admin au chargement de la page
+      document.addEventListener('DOMContentLoaded', checkAdmin);
+    </script>
   </body>
 </html>
