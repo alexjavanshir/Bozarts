@@ -2,33 +2,68 @@
 session_start();
 require_once '../config/database.php';
 
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../connexion.html");
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Vous devez être connecté pour laisser un avis']);
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $client_id = $_SESSION["id"];
-    $artisan_id = trim($_POST["artisan_id"]);
-    $note = trim($_POST["note"]);
-    $commentaire = trim($_POST["commentaire"]);
+// Récupérer les données POST
+$data = json_decode(file_get_contents('php://input'), true);
+$produitId = $data['produitId'] ?? null;
+$note = $data['note'] ?? null;
+$commentaire = $data['commentaire'] ?? null;
 
-    // Validation de la note
-    if ($note < 1 || $note > 5) {
-        $error = "La note doit être comprise entre 1 et 5.";
-    } else {
-        $sql = "INSERT INTO avis (client_id, artisan_id, note, commentaire) VALUES (?, ?, ?, ?)";
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "iiis", $client_id, $artisan_id, $note, $commentaire);
-            if (mysqli_stmt_execute($stmt)) {
-                header("location: ../profil-artisan.php?id=" . $artisan_id);
-                exit();
-            } else {
-                $error = "Une erreur est survenue lors de l'ajout de l'avis.";
-            }
-        }
-        mysqli_stmt_close($stmt);
-    }
-    mysqli_close($conn);
+if (!$produitId || !$note || !$commentaire) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Tous les champs sont requis']);
+    exit;
 }
-?>
+
+// Vérifier que la note est entre 1 et 5
+if ($note < 1 || $note > 5) {
+    http_response_code(400);
+    echo json_encode(['error' => 'La note doit être comprise entre 1 et 5']);
+    exit;
+}
+
+try {
+    // Récupérer l'ID de l'artisan pour ce produit
+    $stmt = $conn->prepare("SELECT artisan_id FROM produits WHERE id = ?");
+    $stmt->bind_param("i", $produitId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $produit = $result->fetch_assoc();
+
+    if (!$produit) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Produit non trouvé']);
+        exit;
+    }
+
+    // Vérifier si l'utilisateur a déjà laissé un avis pour ce produit
+    $stmt = $conn->prepare("SELECT id FROM avis WHERE client_id = ? AND produit_id = ?");
+    $stmt->bind_param("ii", $_SESSION['user_id'], $produitId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Vous avez déjà laissé un avis pour ce produit']);
+        exit;
+    }
+
+    // Ajouter l'avis
+    $stmt = $conn->prepare("INSERT INTO avis (client_id, artisan_id, produit_id, note, commentaire) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iiiss", $_SESSION['user_id'], $produit['artisan_id'], $produitId, $note, $commentaire);
+    
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Avis ajouté avec succès']);
+    } else {
+        throw new Exception("Erreur lors de l'ajout de l'avis");
+    }
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Erreur lors de l\'ajout de l\'avis: ' . $e->getMessage()]);
+}
