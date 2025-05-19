@@ -8,6 +8,44 @@
     <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
+    <header>
+        <div class="logo">
+          <a href="../pages/index.html" class="icon-button">
+            <img src="../assets/icons/LOGO.png" alt="BOZARTS" />
+          </a>
+        </div>
+        <div class="search-container">
+          <form action="recherche.html" method="get">
+            <input type="text" name="search" class="search-box" placeholder="Rechercher" />
+            <button type="submit" class="search-button">
+              <img src="../assets/icons/search-icon.png" class="search-icon" alt="search icon" />
+            </button>
+          </form>
+        </div>
+        <div class="header-right">
+          <a href="panier.html" class="icon-button" style="width: 20%">
+            <img
+              src="../assets/icons/panier-icon.png"
+              alt="Panier"
+              class="icon-img"
+            />
+          </a>
+          <a href="messagerie.html" class="icon-button" id="notifications-link">
+            <img
+              src="../assets/icons/notifications-icon.png"
+              alt="Notifications"
+              class="icon-img"
+            />
+          </a>
+          <a href="connexion.html" class="icon-button" id="profile-link">
+            <img
+              src="../assets/icons/profil-icon.png"
+              alt="Profil"
+              class="icon-img"
+            />
+          </a>
+        </div>
+      </header>
     <div id="header"></div>
 
     <main class="admin-container">
@@ -24,7 +62,13 @@
         </div>
     </main>
 
-    <div id="footer"></div>
+    <footer>
+        <div>© 2025 Bozarts. Tous droits réservés.
+          <a href="CGU.html" >Nos CGU et mentions légales</a></div>
+        <ul>
+          <li><a href="faq.html" class="faq-button">Notre FAQ</a></li>
+        </ul>
+      </footer>
 
     <script src="../js/header.js"></script>
     <script src="../js/admin.js"></script>
