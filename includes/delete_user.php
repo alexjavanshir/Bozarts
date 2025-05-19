@@ -1,9 +1,23 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once '../config/database.php';
 
 // Vérifier si l'utilisateur est admin
-if (!isset($_SESSION['user_id']) || $_SESSION['email'] !== 'admin@bozarts.com') {
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Accès non autorisé']);
+    exit;
+}
+
+// Vérifier que c'est bien l'admin
+$query = "SELECT email, droit FROM utilisateurs WHERE id = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$user = mysqli_fetch_assoc($result);
+
+if (!$user || $user['droit'] !== 'admin') {
     http_response_code(403);
     echo json_encode(['error' => 'Accès non autorisé']);
     exit;
@@ -20,31 +34,30 @@ if (!$userId) {
 }
 
 try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     // Ne pas permettre la suppression de l'admin principal
-    $stmt = $pdo->prepare("SELECT email FROM users WHERE id = ?");
-    $stmt->execute([$userId]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = mysqli_prepare($conn, "SELECT email FROM utilisateurs WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $targetUser = mysqli_fetch_assoc($result);
 
-    if ($user && $user['email'] === 'admin@bozarts.com') {
+    if ($targetUser && $targetUser['email'] === 'admin@bozarts.com') {
         http_response_code(403);
         echo json_encode(['error' => 'Impossible de supprimer le compte administrateur principal']);
         exit;
     }
 
     // Supprimer l'utilisateur
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-    $stmt->execute([$userId]);
-
-    if ($stmt->rowCount() > 0) {
+    $stmt = mysqli_prepare($conn, "DELETE FROM utilisateurs WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    
+    if (mysqli_stmt_execute($stmt)) {
         echo json_encode(['success' => true]);
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Utilisateur non trouvé']);
     }
-} catch (PDOException $e) {
+} catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Erreur lors de la suppression de l\'utilisateur']);
 } 
