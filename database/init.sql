@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     description TEXT,
     adresse TEXT,
     telephone VARCHAR(20),
+    droit ENUM('sans-droit', 'admin') DEFAULT 'sans-droit' NOT NULL,
     statut VARCHAR(20) DEFAULT 'actif',
     date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -95,16 +96,16 @@ CREATE TABLE IF NOT EXISTS paniers (
 
 
 -- Insertion des clients
-INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, adresse, telephone) VALUES
-('client', 'Dupont', 'Jean', 'jean.dupont@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123 rue de Paris, 75001 Paris', '0612345678'),
-('client', 'Martin', 'Sophie', 'sophie.martin@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456 avenue des Champs, 75008 Paris', '0623456789'),
-('client', 'Bernard', 'Pierre', 'pierre.bernard@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '789 boulevard Saint-Germain, 75006 Paris', '0634567890');
+INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, adresse, telephone, droit) VALUES
+('client', 'Dupont', 'Jean', 'jean.dupont@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123 rue de Paris, 75001 Paris', '0612345678', 'sans-droit'),
+('client', 'Martin', 'Sophie', 'sophie.martin@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '456 avenue des Champs, 75008 Paris', '0623456789', 'sans-droit'),
+('client', 'Bernard', 'Pierre', 'pierre.bernard@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '789 boulevard Saint-Germain, 75006 Paris', '0634567890', 'sans-droit');
 
 -- Insertion des artisans
-INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, description, adresse, telephone) VALUES
-('artisan', 'Leroy', 'Marie', 'marie.leroy@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Artisan céramiste passionnée depuis 10 ans', '321 rue de la Poterie, 75011 Paris', '0645678901'),
-('artisan', 'Petit', 'Luc', 'luc.petit@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sculpteur sur bois spécialisé dans le mobilier artisanal', '654 avenue du Bois, 75012 Paris', '0656789012'),
-('artisan', 'Moreau', 'Julie', 'julie.moreau@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Créatrice de bijoux en argent et pierres naturelles', '987 rue des Artisans, 75013 Paris', '0667890123');
+INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, description, adresse, telephone, droit) VALUES
+('artisan', 'Leroy', 'Marie', 'marie.leroy@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Artisan céramiste passionnée depuis 10 ans', '321 rue de la Poterie, 75011 Paris', '0645678901', 'sans-droit'),
+('artisan', 'Petit', 'Luc', 'luc.petit@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sculpteur sur bois spécialisé dans le mobilier artisanal', '654 avenue du Bois, 75012 Paris', '0656789012', 'sans-droit'),
+('artisan', 'Moreau', 'Julie', 'julie.moreau@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Créatrice de bijoux en argent et pierres naturelles', '987 rue des Artisans, 75013 Paris', '0667890123', 'sans-droit');
 
 -- Insertion des produits
 INSERT INTO produits (artisan_id, nom, description, prix, image_url, categorie) VALUES

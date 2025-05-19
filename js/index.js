@@ -30,6 +30,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <a href="../pages/recherche.html?search=+" class="join-button">Découvrir</a>
                 `;
             }
+            else if (data.droit === 'admin') {
+                // L'utilisateur est connecté en tant qu'admin, modifier le bandeau
+                joinUsSection.innerHTML = `
+                    <h2 class="section-title">ADMIN</h2>
+                    <div class="rejoindre-text">
+                        <p>Bienvenue dans l'interface d'administration.<br> Gérez les utilisateurs et les contenus de la plateforme.</p>
+                    </div>
+                    <div class="admin-buttons">
+                        <a href="../pages/admin.html" class="join-button admin-button">Administration</a>
+                        <a href="../pages/recherche.html?search=+" class="join-button">Découvrir</a>
+                    </div>
+                `;
+            }
             // Si c'est un client non connecté, on garde le bandeau "Join Us" par défaut
             else {
                 joinUsSection.innerHTML = ` 

@@ -5,12 +5,14 @@ ini_set('display_errors', 0); // Désactiver l'affichage des erreurs
 session_start();
 require_once '../config/database.php';
 
+header('Content-Type: application/json');
+
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
     
     // Vérifier que l'utilisateur existe toujours en base de données et récupérer son type
-    $query = "SELECT id, type FROM utilisateurs WHERE id = ?";
+    $query = "SELECT id, type, email, droit FROM utilisateurs WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $userId);
     mysqli_stmt_execute($stmt);
@@ -18,7 +20,13 @@ if (isset($_SESSION['user_id'])) {
     
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-        echo json_encode(['id' => $userId, 'type' => $user['type']]);
+        $response = [
+            'id' => $userId,
+            'type' => $user['type'],
+            'email' => $user['email'],
+            'droit' => $user['droit']
+        ];
+        echo json_encode($response);
     } else {
         // L'utilisateur n'existe plus en base de données
         // Détruire la session
