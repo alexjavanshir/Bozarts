@@ -4,7 +4,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadAvis();
     setupAvisForm();
+    setupStarRating();
 });
+
+function setupStarRating() {
+    const ratingInputs = document.querySelectorAll('.rating input');
+    const ratingLabels = document.querySelectorAll('.rating label');
+
+    ratingInputs.forEach((input, index) => {
+        input.addEventListener('change', function() {
+            // Réinitialiser toutes les étoiles
+            ratingLabels.forEach(label => {
+                label.querySelector('i').className = 'far fa-star';
+            });
+
+            // Activer les étoiles jusqu'à la note sélectionnée
+            for (let i = 0; i <= index; i++) {
+                ratingLabels[i].querySelector('i').className = 'fas fa-star';
+            }
+        });
+
+        // Effet hover
+        input.addEventListener('mouseenter', function() {
+            ratingLabels.forEach((label, i) => {
+                if (i <= index) {
+                    label.querySelector('i').className = 'fas fa-star';
+                } else {
+                    label.querySelector('i').className = 'far fa-star';
+                }
+            });
+        });
+    });
+
+    // Réinitialiser au survol de la div rating
+    const ratingDiv = document.querySelector('.rating');
+    ratingDiv.addEventListener('mouseleave', function() {
+        const checkedInput = document.querySelector('.rating input:checked');
+        if (checkedInput) {
+            const index = Array.from(ratingInputs).indexOf(checkedInput);
+            ratingLabels.forEach((label, i) => {
+                label.querySelector('i').className = i <= index ? 'fas fa-star' : 'far fa-star';
+            });
+        } else {
+            ratingLabels.forEach(label => {
+                label.querySelector('i').className = 'far fa-star';
+            });
+        }
+    });
+}
 
 function loadAvis() {
     const produitId = new URLSearchParams(window.location.search).get('id');
@@ -105,6 +152,10 @@ function setupAvisForm() {
             if (data.success) {
                 showSuccess('Avis ajouté avec succès');
                 form.reset();
+                // Réinitialiser les étoiles
+                document.querySelectorAll('.rating label i').forEach(star => {
+                    star.className = 'far fa-star';
+                });
                 loadAvis();
             } else {
                 showError(data.error);

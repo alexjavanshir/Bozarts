@@ -42,20 +42,8 @@ try {
         exit;
     }
 
-    // Vérifier si l'utilisateur a déjà laissé un avis pour ce produit
-    $stmt = $conn->prepare("SELECT id FROM avis WHERE client_id = ? AND produit_id = ?");
-    $stmt->bind_param("ii", $_SESSION['user_id'], $produitId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Vous avez déjà laissé un avis pour ce produit']);
-        exit;
-    }
-
     // Ajouter l'avis
-    $stmt = $conn->prepare("INSERT INTO avis (client_id, artisan_id, produit_id, note, commentaire) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO avis (client_id, artisan_id, produit_id, note, commentaire, date_creation) VALUES (?, ?, ?, ?, ?, NOW())");
     $stmt->bind_param("iiiss", $_SESSION['user_id'], $produit['artisan_id'], $produitId, $note, $commentaire);
     
     if ($stmt->execute()) {
