@@ -39,3 +39,38 @@
 .legal a:hover {
     color: #d6611e;
 }
+
+/* Styles pour l'interface d'administration des CGU */
+.admin-edit {
+  display: none;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.admin-edit.active {
+  display: block;
+}
+
+.admin-edit textarea {
+  width: 100%;
+  min-height: 400px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.admin-edit button {
+  background-color: #f47f3b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-edit button:hover {
+  background-color: #e66d2a;
+}

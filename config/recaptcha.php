@@ -1,0 +1,4 @@
+<?php
+// Configuration reCAPTCHA
+define('RECAPTCHA_SITE_KEY', '6LdkeUErAAAAAGNM-z-mqyepJ08xVbBgEAXy35KH');
+define('RECAPTCHA_SECRET_KEY', '6LdkeUErAAAAADC1SeUNCQFv50hym1ixQfMHPAx0'); 

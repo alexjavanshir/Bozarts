@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0); // Désactiver l'affichage des erreurs pour éviter qu'elles contaminent le JSON
 
 require_once "../config/database.php";
+require_once "../config/recaptcha.php";
 
 // Fonction pour valider le mot de passe
 function validatePassword($password) {
@@ -19,18 +20,34 @@ function validatePassword($password) {
     return true;
 }
 
+// Fonction pour vérifier le captcha
+function verifyCaptcha($captchaResponse) {
+    $secretKey = "6LdkeUErAAAAADC1SeUNCQFv50hym1ixQfMHPAx0";
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captchaResponse}");
+    $captchaSuccess = json_decode($verify);
+    return $captchaSuccess->success;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm-password'];
-
-        // Validation de la correspondance des mots de passe
-        if ($password !== $confirm_password) {
-            echo json_encode(['success' => false, 'message' => 'Les mots de passe ne correspondent pas!']);
+        // Récupérer les données JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        if (!$data) {
+            echo json_encode(['success' => false, 'message' => 'Données invalides']);
             exit();
         }
-        
+
+        $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+        $password = $data['password'];
+        $captchaResponse = $data['captchaResponse'];
+
+        // Vérifier le captcha
+        if (!verifyCaptcha($captchaResponse)) {
+            echo json_encode(['success' => false, 'message' => 'Vérification du captcha échouée']);
+            exit();
+        }
+
         // Validation de la complexité du mot de passe
         if (!validatePassword($password)) {
             echo json_encode(['success' => false, 'message' => 'Le mot de passe doit contenir au moins 8 caractères et un caractère spécial.']);

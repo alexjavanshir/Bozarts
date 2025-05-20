@@ -7,37 +7,6 @@
     <link rel="stylesheet" href="../assets/css/CGU.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <base href="../pages/index.html" />
-    <style>
-      .admin-edit {
-        display: none;
-        margin: 20px 0;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 8px;
-      }
-      .admin-edit.active {
-        display: block;
-      }
-      .admin-edit textarea {
-        width: 100%;
-        min-height: 400px;
-        margin: 10px 0;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-      .admin-edit button {
-        background-color: #f47f3b;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .admin-edit button:hover {
-        background-color: #e66d2a;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -82,81 +51,98 @@
     <main class="container">
       <div class="admin-edit" id="adminEdit">
         <h2>Édition des CGU</h2>
-        <textarea id="cguContent"></textarea>
+        <textarea id="cguTextarea"></textarea>
         <button onclick="saveCGU()">Enregistrer les modifications</button>
       </div>
 
-      <div id="cguContent">
-        <!-- Le contenu des CGU sera chargé ici -->
+      <div class="legal" id="cguContent">
+        <h1>Conditions Générales d'Utilisation</h1>
+        
+        <section>
+          <h2>1. Acceptation des conditions</h2>
+          <p>En accédant et en utilisant le site Bozarts, vous acceptez d'être lié par les présentes conditions générales d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site.</p>
+        </section>
+
+        <section>
+          <h2>2. Description du service</h2>
+          <p>Bozarts est une plateforme mettant en relation des artisans et des clients pour la vente et l'achat de créations artisanales. Le site permet aux artisans de présenter leurs œuvres et aux clients de les découvrir et de les acquérir.</p>
+        </section>
+
+        <section>
+          <h2>3. Inscription et compte utilisateur</h2>
+          <p>Pour utiliser certaines fonctionnalités du site, vous devez créer un compte. Vous êtes responsable de maintenir la confidentialité de votre compte et de votre mot de passe. Vous acceptez de nous informer immédiatement de toute utilisation non autorisée de votre compte.</p>
+        </section>
+
+        <section>
+          <h2>4. Obligations des utilisateurs</h2>
+          <p>En tant qu'utilisateur, vous vous engagez à :</p>
+          <ul>
+            <li>Fournir des informations exactes et complètes lors de l'inscription</li>
+            <li>Ne pas utiliser le site à des fins illégales ou interdites</li>
+            <li>Ne pas perturber le fonctionnement normal du site</li>
+            <li>Respecter les droits de propriété intellectuelle</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>5. Propriété intellectuelle</h2>
+          <p>Tout le contenu présent sur Bozarts (textes, images, logos, etc.) est protégé par les droits de propriété intellectuelle. Toute reproduction ou utilisation non autorisée est strictement interdite.</p>
+        </section>
+
+        <section>
+          <h2>6. Transactions et paiements</h2>
+          <p>Les transactions entre artisans et clients sont gérées par notre plateforme. Les paiements sont sécurisés et traités conformément à notre politique de confidentialité.</p>
+        </section>
+
+        <section>
+          <h2>7. Protection des données personnelles</h2>
+          <p>Nous collectons et traitons vos données personnelles conformément à notre politique de confidentialité. En utilisant notre site, vous acceptez ce traitement.</p>
+        </section>
+
+        <section>
+          <h2>8. Limitation de responsabilité</h2>
+          <p>Bozarts ne peut être tenu responsable des dommages directs ou indirects résultant de l'utilisation du site ou de l'impossibilité d'y accéder.</p>
+        </section>
+
+        <section>
+          <h2>9. Modification des conditions</h2>
+          <p>Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications prennent effet dès leur publication sur le site.</p>
+        </section>
+
+        <section>
+          <h2>10. Contact</h2>
+          <p>Pour toute question concernant ces conditions, veuillez nous contacter via notre formulaire de contact.</p>
+        </section>
       </div>
     </main>
 
     <footer>
-      <div>© 2025 Bozarts. Tous droits réservés.
-        <a href="CGU.html" >Nos CGU et mentions légales</a>
-      Un problème qui n'est pas dans la FAQ ? <a href="contacter.html" >Nous contacter</a></div>
-      <ul>
-        <li><a href="faq.html" class="faq-button">Notre FAQ</a></li>
-      </ul>
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>© 2025 Bozarts. Tous droits réservés.</p>
+          <p><a href="../pages/CGU.html" class="footer-link">CGU & Mentions légales</a></p>
+          <p>Un problème non résolu par la FAQ ? <a href="../pages/contacter.html" class="footer-link">Contactez-nous</a></p>
+        </div>
+    
+        <div class="footer-center">
+          <ul class="footer-links">
+            <li><a href="faq.html" class="footer-link">Notre FAQ</a></li>
+          </ul>
+        </div>
+    
+        <div class="footer-right">
+          <p>Suivez-nous</p>
+          <div class="social-icons">
+            <a href="#"><img src="../assets/icons/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="../assets/icons/twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="../assets/icons/instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="../assets/icons/linkedin.png" alt="LinkedIn" /></a>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <script src="../js/header.js"></script>
-    <script>
-      // Vérifier si l'utilisateur est admin
-      async function checkAdmin() {
-        try {
-          const response = await fetch('../includes/check_session.php');
-          const data = await response.json();
-          
-          if (data.droit === 'admin') {
-            document.getElementById('adminEdit').classList.add('active');
-            loadCGUForEdit();
-          }
-        } catch (error) {
-          console.error('Erreur:', error);
-        }
-      }
-
-      // Charger le contenu des CGU pour l'édition
-      async function loadCGUForEdit() {
-        try {
-          const response = await fetch('CGU.html');
-          const content = await response.text();
-          document.getElementById('cguContent').value = content;
-        } catch (error) {
-          console.error('Erreur:', error);
-        }
-      }
-
-      // Sauvegarder les modifications
-      async function saveCGU() {
-        const content = document.getElementById('cguContent').value;
-        
-        try {
-          const response = await fetch('../includes/update_cgu.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ content })
-          });
-
-          const data = await response.json();
-          
-          if (data.success) {
-            alert('CGU mises à jour avec succès !');
-            location.reload();
-          } else {
-            alert('Erreur lors de la mise à jour des CGU');
-          }
-        } catch (error) {
-          console.error('Erreur:', error);
-          alert('Erreur lors de la mise à jour des CGU');
-        }
-      }
-
-      // Vérifier le statut admin au chargement de la page
-      document.addEventListener('DOMContentLoaded', checkAdmin);
-    </script>
+    <script src="../js/cgu.js"></script>
   </body>
 </html>

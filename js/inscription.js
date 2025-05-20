@@ -42,65 +42,56 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    formulaire.addEventListener('submit', function(e) {
+    formulaire.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Masquer le message d'erreur précédent s'il existe
-        errorContainer.style.display = 'none';
-        
-        // Récupération des valeurs du formulaire
+        // Vérification du captcha
+        const captchaResponse = grecaptcha.getResponse();
+        if (!captchaResponse) {
+            alert('Veuillez compléter le captcha');
+            return;
+        }
+
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
-        
-        // Vérification de la complexité du mot de passe
-        if (!validatePassword(password)) {
-            errorContainer.textContent = 'Le mot de passe doit contenir au moins 8 caractères et un caractère spécial.';
-            errorContainer.style.display = 'block';
-            return false;
-        }
-        
+        const conditions = document.getElementById('conditions').checked;
+
         // Vérification des mots de passe
         if (password !== confirmPassword) {
-            errorContainer.textContent = 'Les mots de passe ne correspondent pas.';
-            errorContainer.style.display = 'block';
-            return false;
+            alert('Les mots de passe ne correspondent pas');
+            return;
         }
-        
-        // Récupérer les données du formulaire
-        const formData = new FormData(formulaire);
-        
-        // Désactiver le bouton pendant la requête
-        submitButton.disabled = true;
-        submitButton.textContent = 'Inscription en cours...';
-        
-        // Envoi des données via Fetch
-        fetch('../includes/inscription.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
+
+        // Vérification des conditions
+        if (!conditions) {
+            alert('Vous devez accepter les conditions d\'utilisation');
+            return;
+        }
+
+        try {
+            const response = await fetch('../includes/inscription.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    captchaResponse
+                })
+            });
+
+            const data = await response.json();
+
             if (data.success) {
-                // Redirection en cas de succès
-                window.location.href = data.redirect;
+                window.location.href = 'completer-profil.html';
             } else {
-                // Afficher le message d'erreur
-                errorContainer.textContent = data.message;
-                errorContainer.style.display = 'block';
-                
-                // Réactiver le bouton
-                submitButton.disabled = false;
-                submitButton.textContent = 'S\'inscrire';
+                alert(data.message || 'Une erreur est survenue lors de l\'inscription');
             }
-        })
-        .catch(error => {
-            errorContainer.textContent = 'Une erreur est survenue lors de l\'inscription.';
-            errorContainer.style.display = 'block';
-            console.error('Erreur d\'inscription:', error);
-            
-            // Réactiver le bouton
-            submitButton.disabled = false;
-            submitButton.textContent = 'S\'inscrire';
-        });
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue lors de l\'inscription');
+        }
     });
 });
