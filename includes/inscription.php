@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Réponse JSON de succès
         echo json_encode([
             'success' => true, 
-            'redirect' => '../pages/completer-profil.html'
+            'message' => 'Compte créé avec succès.'
         ]);
         exit();
     } catch (Exception $e) {

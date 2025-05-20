@@ -115,3 +115,13 @@ INSERT INTO produits (artisan_id, nom, description, prix, image_url, categorie) 
 (5, 'Chaise artisanale', 'Chaise en bois massif avec dossier sculpté', 199.99, 'chaise.jpg', 'Mobilier'),
 (6, 'Collier en argent', 'Collier en argent 925 avec pierre de lune', 79.99, 'collier.jpg', 'Bijoux'),
 (6, 'Boucles d\'oreilles', 'Boucles d\'oreilles en argent avec améthyste', 59.99, 'boucles_oreilles.jpg', 'Bijoux');
+
+-- Insertion des avis sur les produits
+INSERT INTO avis (client_id, produit_id, note, commentaire, date_creation) VALUES
+(1, 1, 5, 'Superbe vase, la qualité est exceptionnelle et les couleurs sont magnifiques !', '2024-03-15 14:30:00'),
+(2, 1, 4, 'Très beau vase, un peu plus petit que prévu mais très élégant.', '2024-03-16 09:15:00'),
+(3, 2, 5, 'Service à thé magnifique, la finition est parfaite.', '2024-03-14 16:45:00'),
+(1, 3, 5, 'Table basse de grande qualité, le bois est magnifique.', '2024-03-13 11:20:00'),
+(2, 4, 4, 'Belle chaise, très confortable et solide.', '2024-03-12 15:40:00'),
+(3, 5, 5, 'Collier magnifique, la pierre de lune est superbe.', '2024-03-11 10:30:00'),
+(1, 6, 4, 'Jolies boucles d\'oreilles, très élégantes.', '2024-03-10 13:25:00');
