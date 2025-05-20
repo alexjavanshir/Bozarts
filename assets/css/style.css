@@ -141,12 +141,29 @@ header {
 
 /* Footer */
 footer {
-    display: flex;
-    justify-content: space-between;
     padding: 15px 20px;
     margin-top: auto;
     color: var(--primary-color);
     background-color: var(--white);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-right {
+    display: flex;
+    align-items: flex-start;
 }
 
 .footer-link {
