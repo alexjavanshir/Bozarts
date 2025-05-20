@@ -47,30 +47,67 @@
   padding: 20px;
   background: #f8f9fa;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .admin-edit.active {
   display: block;
 }
 
-.admin-edit textarea {
+.edit-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.edit-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.edit-controls {
+  margin-top: 15px;
+}
+
+.edit-section textarea {
   width: 100%;
-  min-height: 400px;
+  min-height: 150px;
   margin: 10px 0;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.edit-section textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(244, 127, 59, 0.2);
 }
 
 .admin-edit button {
-  background-color: #f47f3b;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
 }
 
 .admin-edit button:hover {
   background-color: #e66d2a;
+}
+
+#cguTextarea {
+  display: none;
 }
