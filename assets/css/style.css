@@ -447,7 +447,7 @@ footer {
 /* Message de bienvenue utilisateur */
 .user-welcome {
     display: none;
-    border: 2px solid var(--  -color);
+    border: 2px solid var(--primary-color);
     border-radius: 10px;
     padding: 10px 20px;
     margin: 0 20px;

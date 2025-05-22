@@ -25,28 +25,81 @@ document.addEventListener('DOMContentLoaded', async () => {
         const messageForm = document.getElementById('message-form');
         const searchInput = document.getElementById('search-conversations');
         let currentConversationId = null;
+        let isAdminConversation = false;
 
-        // Récupérer le vendeur_id de l'URL si présent
+        // Récupérer les paramètres de l'URL
         const urlParams = new URLSearchParams(window.location.search);
         const vendeurId = urlParams.get('vendeur_id');
+        const destinataire = urlParams.get('destinataire');
+
+        // Initialiser la conversation avec l'admin si nécessaire
+        async function initializeAdminConversation() {
+            try {
+                console.log('Initialisation de la conversation avec l\'admin...');
+                const adminResponse = await fetch('../includes/get_admin_id.php');
+                const adminData = await adminResponse.json();
+                
+                if (adminData.error) {
+                    console.error('Erreur lors de la récupération de l\'admin:', adminData.error);
+                    return false;
+                }
+                
+                console.log('Données admin reçues:', adminData);
+                
+                if (adminData.admin_id) {
+                    // Mettre à jour l'URL sans recharger la page
+                    const newUrl = new URL(window.location.href);
+                    newUrl.searchParams.set('admin_id', adminData.admin_id);
+                    newUrl.searchParams.delete('destinataire');
+                    newUrl.searchParams.delete('vendeur_id');
+                    window.history.replaceState({}, '', newUrl);
+                    
+                    console.log('Chargement de la conversation avec l\'admin ID:', adminData.admin_id);
+                    
+                    // Mettre à jour le titre de la conversation
+                    const conversationTitle = document.getElementById('current-conversation-title');
+                    if (conversationTitle) {
+                        conversationTitle.textContent = `Support Bozarts`;
+                    }
+                    
+                    isAdminConversation = true;
+                    // Charger la conversation avec l'admin
+                    await loadMessages(adminData.admin_id);
+                    return true;
+                }
+            } catch (error) {
+                console.error('Erreur lors de la récupération de l\'admin:', error);
+            }
+            return false;
+        }
 
         // Charger les conversations
-        function loadConversations() {
-            fetch('../includes/messagerie.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.error(data.error);
-                        return;
-                    }
-                    displayConversations(data.conversations);
-                    
-                    // Si un vendeur_id est présent dans l'URL, charger sa conversation
-                    if (vendeurId) {
-                        loadMessages(vendeurId);
-                    }
-                })
-                .catch(error => console.error('Erreur:', error));
+        async function loadConversations() {
+            try {
+                const response = await fetch('../includes/messagerie.php');
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                
+                displayConversations(data.conversations);
+                
+                // Vérifier les paramètres d'URL
+                const adminId = urlParams.get('admin_id');
+                if (adminId) {
+                    isAdminConversation = true;
+                    loadMessages(adminId);
+                } else if (vendeurId) {
+                    isAdminConversation = false;
+                    loadMessages(vendeurId);
+                } else if (destinataire === 'admin') {
+                    await initializeAdminConversation();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
         }
 
         // Afficher les conversations
@@ -59,7 +112,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="conversation-name">${conv.prenom} ${conv.nom}</div>
                     <div class="conversation-date">${new Date(conv.last_message_date).toLocaleDateString()}</div>
                 `;
-                div.addEventListener('click', () => loadMessages(conv.other_user_id));
+                div.addEventListener('click', () => {
+                    isAdminConversation = false;
+                    loadMessages(conv.other_user_id);
+                });
                 conversationsList.appendChild(div);
             });
         }
