@@ -61,3 +61,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 }); 
+
+// Fonctions d'administration de la FAQ
+async function checkAdmin() {
+    try {
+        const response = await fetch('../includes/check_session.php');
+        const data = await response.json();
+        
+        if (data.droit === 'admin') {
+            document.getElementById('adminEdit').classList.add('active');
+            loadFAQForEdit();
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+// Charger le contenu de la FAQ pour l'édition
+async function loadFAQForEdit() {
+    try {
+        const response = await fetch('faq.html');
+        const content = await response.text();
+        document.getElementById('faqContent').value = content;
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+// Sauvegarder les modifications
+async function saveFAQ() {
+    const content = document.getElementById('faqContent').value;
+    
+    try {
+        const response = await fetch('../includes/update_faq.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content })
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('FAQ mise à jour avec succès !');
+            location.reload();
+        } else {
+            alert('Erreur lors de la mise à jour de la FAQ');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert('Erreur lors de la mise à jour de la FAQ');
+    }
+}
+
+// Vérifier le statut admin au chargement de la page
+document.addEventListener('DOMContentLoaded', checkAdmin); 
