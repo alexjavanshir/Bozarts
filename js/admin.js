@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupTabs();
         loadFAQ();
         setupFAQForm();
+        loadCGU();
+        setupCGUForm();
     } catch (error) {
         console.error('Erreur:', error);
         window.location.href = '../pages/index.html';
@@ -332,4 +334,177 @@ function setupSearch() {
             card.style.display = email.includes(searchTerm) ? '' : 'none';
         });
     });
-} 
+}
+
+// Charger les CGU
+async function loadCGU() {
+    try {
+        const response = await fetch('../includes/get_cgu.php');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const cgus = await response.json();
+        displayCGUs(cgus);
+    } catch (error) {
+        console.error('Erreur lors du chargement des CGU:', error);
+    }
+}
+
+// Afficher les CGU
+function displayCGUs(cgus) {
+    const cguList = document.getElementById('cgu-list');
+    cguList.innerHTML = '';
+
+    cgus.forEach(cgu => {
+        const cguCard = document.createElement('div');
+        cguCard.className = 'cgu-card';
+        cguCard.innerHTML = `
+            <div class="cgu-info">
+                <div class="cgu-titre">${cgu.titre}</div>
+                <div class="cgu-contenu">${cgu.contenu}</div>
+            </div>
+            <div class="cgu-actions">
+                <button class="btn-admin btn-edit" onclick="editCGU(${cgu.id}, '${cgu.titre.replace(/'/g, "\\'")}', '${cgu.contenu.replace(/'/g, "\\'")}')">
+                    Modifier
+                </button>
+                <button class="btn-admin btn-delete" onclick="deleteCGU(${cgu.id})">
+                    Supprimer
+                </button>
+            </div>
+        `;
+        cguList.appendChild(cguCard);
+    });
+}
+
+// Éditer une CGU
+function editCGU(id, titre, contenu) {
+    // Afficher le formulaire
+    const cguFormContainer = document.getElementById('cgu-form-container');
+    cguFormContainer.style.display = 'flex';
+    
+    // Changer le titre du formulaire
+    document.getElementById('cgu-form-title').textContent = 'Modifier la section';
+    
+    // Remplir le formulaire avec les données existantes
+    document.getElementById('cgu-id').value = id;
+    document.getElementById('cgu-titre').value = titre;
+    document.getElementById('cgu-contenu').value = contenu;
+}
+
+// Configuration du formulaire CGU
+function setupCGUForm() {
+    const addCguBtn = document.getElementById('add-cgu-btn');
+    const cguFormContainer = document.getElementById('cgu-form-container');
+    const cguForm = document.getElementById('cgu-form');
+    const cancelCguBtn = document.getElementById('cancel-cgu-btn');
+    
+    // Afficher le formulaire pour ajouter une nouvelle section
+    addCguBtn.addEventListener('click', () => {
+        document.getElementById('cgu-form-title').textContent = 'Ajouter une section';
+        document.getElementById('cgu-id').value = '';
+        document.getElementById('cgu-titre').value = '';
+        document.getElementById('cgu-contenu').value = '';
+        cguFormContainer.style.display = 'flex';
+    });
+    
+    // Masquer le formulaire
+    cancelCguBtn.addEventListener('click', () => {
+        cguFormContainer.style.display = 'none';
+    });
+    
+    // Soumettre le formulaire
+    cguForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const cguId = document.getElementById('cgu-id').value;
+        const titre = document.getElementById('cgu-titre').value;
+        const contenu = document.getElementById('cgu-contenu').value;
+        
+        try {
+            const url = cguId ? '../includes/update_cgu.php' : '../includes/add_cgu.php';
+            const data = cguId ? 
+                { id: cguId, titre, contenu } : 
+                { titre, contenu };
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(result.message);
+                cguFormContainer.style.display = 'none';
+                loadCGU(); // Recharger la liste des CGU
+            } else {
+                alert(result.error || 'Une erreur est survenue');
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue lors de l\'enregistrement');
+        }
+    });
+}
+
+// Supprimer une CGU
+async function deleteCGU(id) {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer cette section ?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('../includes/delete_cgu.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(result.message);
+            loadCGU(); // Recharger la liste des CGU
+        } else {
+            alert(result.error || 'Une erreur est survenue');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert('Une erreur est survenue lors de la suppression');
+    }
+}
+
+// Recherche dans les CGU
+function setupCGUSearch() {
+    const searchInput = document.getElementById('search-cgu');
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const cguCards = document.querySelectorAll('.cgu-card');
+        
+        cguCards.forEach(card => {
+            const titre = card.querySelector('.cgu-titre').textContent.toLowerCase();
+            const contenu = card.querySelector('.cgu-contenu').textContent.toLowerCase();
+            
+            if (titre.includes(searchTerm) || contenu.includes(searchTerm)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Appeler setupCGUSearch après le chargement des CGU 

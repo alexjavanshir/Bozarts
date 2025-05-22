@@ -56,6 +56,7 @@
         <div class="admin-tabs">
             <button class="tab-button active" data-tab="users">Gestion des utilisateurs</button>
             <button class="tab-button" data-tab="faq">Gestion de la FAQ</button>
+            <button class="tab-button" data-tab="cgu">Gestion des CGU</button>
         </div>
         
         <div class="admin-section tab-content active" id="users-tab">
@@ -104,6 +105,44 @@
                         
                         <div class="form-actions">
                             <button type="button" id="cancel-faq-btn" class="btn-admin btn-cancel">Annuler</button>
+                            <button type="submit" class="btn-admin btn-submit">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-section tab-content" id="cgu-tab">
+            <h2>Gestion des CGU</h2>
+            <div class="search-bar">
+                <input type="text" id="search-cgu" placeholder="Rechercher dans les CGU...">
+            </div>
+            
+            <button id="add-cgu-btn" class="btn-admin btn-add">Ajouter une section</button>
+            
+            <div class="cgu-list" id="cgu-list">
+                <!-- La liste des CGU sera chargée dynamiquement -->
+            </div>
+            
+            <!-- Formulaire d'ajout/édition de CGU (initialement caché) -->
+            <div class="cgu-form-container" id="cgu-form-container">
+                <div class="cgu-form">
+                    <h3 id="cgu-form-title">Ajouter une section</h3>
+                    <form id="cgu-form">
+                        <input type="hidden" id="cgu-id">
+                        
+                        <div class="form-group">
+                            <label for="cgu-titre">Titre:</label>
+                            <input type="text" id="cgu-titre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cgu-contenu">Contenu:</label>
+                            <textarea id="cgu-contenu" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="cancel-cgu-btn" class="btn-admin btn-cancel">Annuler</button>
                             <button type="submit" class="btn-admin btn-submit">Enregistrer</button>
                         </div>
                     </form>

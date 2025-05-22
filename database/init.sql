@@ -14,6 +14,16 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table pour les CGU
+CREATE TABLE IF NOT EXISTS cgu (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255) NOT NULL,
+    contenu TEXT NOT NULL,
+    ordre INT DEFAULT 0,
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_modification DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Table pour les FAQ
 CREATE TABLE IF NOT EXISTS faq (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -103,6 +113,7 @@ CREATE TABLE IF NOT EXISTS paniers (
     FOREIGN KEY (produit_id) REFERENCES produits(id),
     UNIQUE KEY unique_panier (client_id, produit_id)
 );
+
 -- Insertion des données de test
 
 
@@ -149,3 +160,16 @@ INSERT INTO faq (question, titre_reponse, reponse, ordre) VALUES
 ('Comment promouvoir mes créations sur Bozarts ?', 'Promotion de vos créations', 'Pour mettre en valeur vos créations, ajoutez des photos de qualité, des descriptions détaillées et utilisez des mots-clés pertinents. Participez activement à la communauté en répondant rapidement aux messages et en publiant régulièrement de nouvelles créations. Bozarts propose également des options de mise en avant payantes comme l\'affichage en tête de liste ou la présentation dans notre newsletter mensuelle. Contactez-nous pour plus d\'informations sur ces services.', 8),
 ('Comment fonctionne le système d\'évaluation des artisans ?', 'Système d\'évaluation', 'Après chaque achat, les clients peuvent évaluer l\'artisan sur une échelle de 1 à 5 étoiles et laisser un commentaire. Ces évaluations portent sur la qualité du produit, la communication et le respect des délais. La note moyenne est affichée sur le profil de l\'artisan. Ce système permet de valoriser les artisans de qualité et d\'aider les clients dans leurs choix. Les avis inappropriés peuvent être signalés à notre équipe de modération.', 9),
 ('Comment participer aux événements et salons organisés par Bozarts ?', 'Événements et salons', 'Bozarts organise régulièrement des salons d\'artisanat et des expositions physiques pour permettre aux artisans de rencontrer leur public. Les artisans inscrits sur la plateforme sont prioritaires pour participer à ces événements. Pour vous inscrire, rendez-vous dans la section "Événements" de votre espace artisan et sélectionnez les événements qui vous intéressent. Les frais de participation et les modalités sont indiqués pour chaque événement.', 10);
+
+-- Insertion des données de CGU
+INSERT INTO cgu (titre, contenu, ordre) VALUES
+('1. Acceptation des conditions', 'En accédant et en utilisant le site Bozarts, vous acceptez d\'être lié par les présentes conditions générales d\'utilisation. Si vous n\'acceptez pas ces conditions, veuillez ne pas utiliser notre site...', 1),
+('2. Description du service', 'Bozarts est une plateforme mettant en relation des artisans et des clients pour la vente et l\'achat de créations artisanales. Le site permet aux artisans de présenter leurs œuvres et aux clients de les découvrir et de les acquérir.', 2),
+('3. Inscription et compte utilisateur', 'Pour utiliser certaines fonctionnalités du site, vous devez créer un compte. Vous êtes responsable de maintenir la confidentialité de votre compte et de votre mot de passe. Vous acceptez de nous informer immédiatement de toute utilisation non autorisée de votre compte.', 3),
+('4. Obligations des utilisateurs', 'En tant qu\'utilisateur, vous vous engagez à :\n- Fournir des informations exactes et complètes lors de l\'inscription\n- Ne pas utiliser le site à des fins illégales ou interdites\n- Ne pas perturber le fonctionnement normal du site\n- Respecter les droits de propriété intellectuelle', 4),
+('5. Propriété intellectuelle', 'Tout le contenu présent sur Bozarts (textes, images, logos, etc.) est protégé par les droits de propriété intellectuelle. Toute reproduction ou utilisation non autorisée est strictement interdite.', 5),
+('6. Transactions et paiements', 'Les transactions entre artisans et clients sont gérées par notre plateforme. Les paiements sont sécurisés et traités conformément à notre politique de confidentialité.', 6),
+('7. Protection des données personnelles', 'Nous collectons et traitons vos données personnelles conformément à notre politique de confidentialité. En utilisant notre site, vous acceptez ce traitement.', 7),
+('8. Limitation de responsabilité', 'Bozarts ne peut être tenu responsable des dommages directs ou indirects résultant de l\'utilisation du site ou de l\'impossibilité d\'y accéder.', 8),
+('9. Modification des conditions', 'Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications prennent effet dès leur publication sur le site.', 9),
+('10. Contact', 'Pour toute question concernant ces conditions, veuillez nous contacter via notre formulaire de contact.', 10);

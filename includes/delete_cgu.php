@@ -26,27 +26,30 @@ if (!$user || $user['droit'] !== 'admin') {
 // Récupérer les données POST
 $data = json_decode(file_get_contents('php://input'), true);
 $id = $data['id'] ?? null;
-$titre = $data['titre'] ?? null;
-$contenu = $data['contenu'] ?? null;
 
-if (!$id || !$titre || !$contenu) {
+if (!$id) {
     http_response_code(400);
-    echo json_encode(['error' => 'Données manquantes']);
+    echo json_encode(['error' => 'ID manquant']);
     exit;
 }
 
 try {
-    // Mettre à jour la section
-    $query = "UPDATE cgu SET titre = ?, contenu = ? WHERE id = ?";
+    // Supprimer la section
+    $query = "DELETE FROM cgu WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ssi", $titre, $contenu, $id);
+    mysqli_stmt_bind_param($stmt, "i", $id);
     
     if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(['success' => true, 'message' => 'Section mise à jour avec succès']);
+        // Réorganiser l'ordre des sections restantes
+        $query = "SET @count = 0; UPDATE cgu SET ordre = @count:= @count + 1 ORDER BY ordre;";
+        mysqli_multi_query($conn, $query);
+        
+        echo json_encode(['success' => true, 'message' => 'Section supprimée avec succès']);
     } else {
-        throw new Exception("Erreur lors de la mise à jour de la section");
+        throw new Exception("Erreur lors de la suppression de la section");
     }
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Erreur lors de la mise à jour de la section']);
-} 
+    echo json_encode(['error' => 'Erreur lors de la suppression de la section']);
+}
+?> 

@@ -25,28 +25,34 @@ if (!$user || $user['droit'] !== 'admin') {
 
 // Récupérer les données POST
 $data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'] ?? null;
 $titre = $data['titre'] ?? null;
 $contenu = $data['contenu'] ?? null;
 
-if (!$id || !$titre || !$contenu) {
+if (!$titre || !$contenu) {
     http_response_code(400);
     echo json_encode(['error' => 'Données manquantes']);
     exit;
 }
 
 try {
-    // Mettre à jour la section
-    $query = "UPDATE cgu SET titre = ?, contenu = ? WHERE id = ?";
+    // Trouver le dernier ordre
+    $query = "SELECT MAX(ordre) as max_ordre FROM cgu";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    $ordre = ($row['max_ordre'] ?? 0) + 1;
+
+    // Insérer la nouvelle section
+    $query = "INSERT INTO cgu (titre, contenu, ordre) VALUES (?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ssi", $titre, $contenu, $id);
+    mysqli_stmt_bind_param($stmt, "ssi", $titre, $contenu, $ordre);
     
     if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(['success' => true, 'message' => 'Section mise à jour avec succès']);
+        echo json_encode(['success' => true, 'message' => 'Section ajoutée avec succès']);
     } else {
-        throw new Exception("Erreur lors de la mise à jour de la section");
+        throw new Exception("Erreur lors de l'ajout de la section");
     }
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Erreur lors de la mise à jour de la section']);
-} 
+    echo json_encode(['error' => 'Erreur lors de l\'ajout de la section']);
+}
+?> 
