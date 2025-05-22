@@ -1,7 +1,22 @@
 <?php
 
 session_start();
+
+// Capturer la sortie de check_session.php
+ob_start();
 require_once '../includes/check_session.php';
+$sessionOutput = ob_get_clean();
+
+// Décoder la sortie de la session
+$sessionData = json_decode($sessionOutput, true);
+
+// Vérifier si l'utilisateur est connecté et est admin
+if (isset($sessionData['error']) || $sessionData['droit'] !== 'admin') {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Accès non autorisé']);
+    exit;
+}
+
 require_once '../config/database.php';
 
 // Récupérer les données envoyées en POST

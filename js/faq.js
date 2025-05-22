@@ -1,9 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Gestion de l'accordéon pour les questions-réponses
+    // Charger les FAQ au démarrage
+    loadFAQs();
+    
+    // Gestion de la recherche
+    const searchInput = document.querySelector('.search-bar input');
+    const clearButton = document.querySelector('.close-search');
+    
+    if (searchInput && clearButton) {
+        searchInput.addEventListener('input', filterFAQ);
+        clearButton.addEventListener('click', clearSearch);
+    }
+});
+
+// Charger les FAQ depuis la base de données
+async function loadFAQs() {
+    try {
+        const response = await fetch('../includes/get_faq.php');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const faqs = await response.json();
+        displayFAQs(faqs);
+    } catch (error) {
+        console.error('Erreur lors du chargement des FAQ:', error);
+    }
+}
+
+// Afficher les FAQ dans la page
+function displayFAQs(faqs) {
+    const faqContent = document.getElementById('faq-content');
+    faqContent.innerHTML = '';
+
+    faqs.forEach(faq => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item';
+        faqItem.innerHTML = `
+            <button class="faq-question">
+                ${faq.question}
+            </button>
+            <div class="faq-answer">
+                <p class="answer-title"><br>${faq.titre_reponse}</p>
+                <p class="answer-content">
+                    ${faq.reponse}
+                    <br><br>
+                </p>
+            </div>
+        `;
+        faqContent.appendChild(faqItem);
+    });
+
+    // Réinitialiser les événements d'accordéon
+    setupAccordion();
+}
+
+// Configurer l'accordéon pour les questions-réponses
+function setupAccordion() {
     const questionButtons = document.querySelectorAll('.faq-question');
     
     questionButtons.forEach(button => {
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function() {
             const allAnswers = document.querySelectorAll('.faq-answer');
             const currentAnswer = this.nextElementSibling;
         
@@ -20,47 +75,41 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 currentAnswer.classList.add('active');
         
-                // Petit délai pour que .active soit appliqué AVANT de lire scrollHeight
                 setTimeout(() => {
                     currentAnswer.style.maxHeight = currentAnswer.scrollHeight + 'px';
                 }, 10);
             }
         });
-        
     });
-    
-    // Gestion de la recherche
+}
+
+// Filtrer les FAQ selon la recherche
+function filterFAQ() {
     const searchInput = document.querySelector('.search-bar input');
-    const clearButton = document.querySelector('.close-search');
+    const searchTerm = searchInput.value.toLowerCase();
     const faqItems = document.querySelectorAll('.faq-item');
     
-    if (searchInput && clearButton) {
-        searchInput.addEventListener('input', filterFAQ);
-        clearButton.addEventListener('click', clearSearch);
-    }
-    
-    function filterFAQ() {
-        const searchTerm = searchInput.value.toLowerCase();
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
         
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question').textContent.toLowerCase();
-            const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
-            
-            if (question.includes(searchTerm) || answer.includes(searchTerm)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-    
-    function clearSearch() {
-        searchInput.value = '';
-        faqItems.forEach(item => {
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
             item.style.display = 'block';
-        });
-    }
-}); 
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Effacer la recherche
+function clearSearch() {
+    const searchInput = document.querySelector('.search-bar input');
+    searchInput.value = '';
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        item.style.display = 'block';
+    });
+}
 
 // Fonctions d'administration de la FAQ
 async function checkAdmin() {

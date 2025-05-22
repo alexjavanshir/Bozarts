@@ -83,6 +83,22 @@ function displayFAQs(faqs) {
     });
 }
 
+// Éditer une FAQ
+function editFAQ(id, question, titre, reponse) {
+    // Afficher le formulaire
+    const faqFormContainer = document.getElementById('faq-form-container');
+    faqFormContainer.style.display = 'flex';
+    
+    // Changer le titre du formulaire
+    document.getElementById('form-title').textContent = 'Modifier la question';
+    
+    // Remplir le formulaire avec les données existantes
+    document.getElementById('faq-id').value = id;
+    document.getElementById('faq-question').value = question;
+    document.getElementById('faq-titre').value = titre;
+    document.getElementById('faq-reponse').value = reponse;
+}
+
 // Configuration du formulaire FAQ
 function setupFAQForm() {
     const addFaqBtn = document.getElementById('add-faq-btn');
@@ -158,16 +174,6 @@ function setupFAQForm() {
             alert('Une erreur est survenue lors de l\'enregistrement');
         }
     });
-}
-
-// Éditer une FAQ
-function editFAQ(id, question, titre, reponse) {
-    document.getElementById('form-title').textContent = 'Modifier la question';
-    document.getElementById('faq-id').value = id;
-    document.getElementById('faq-question').value = question;
-    document.getElementById('faq-titre').value = titre;
-    document.getElementById('faq-reponse').value = reponse;
-    document.getElementById('faq-form-container').style.display = 'flex';
 }
 
 // Supprimer une FAQ
