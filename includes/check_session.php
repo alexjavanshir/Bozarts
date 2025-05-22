@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
     
     // Vérifier que l'utilisateur existe toujours en base de données et récupérer son type
-    $query = "SELECT id, type, email, droit FROM utilisateurs WHERE id = ?";
+    $query = "SELECT id, type, email, droit, nom, prenom FROM utilisateurs WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $userId);
     mysqli_stmt_execute($stmt);
@@ -24,7 +24,9 @@ if (isset($_SESSION['user_id'])) {
             'id' => $userId,
             'type' => $user['type'],
             'email' => $user['email'],
-            'droit' => $user['droit']
+            'droit' => $user['droit'],
+            'nom' => $user['nom'],
+            'prenom' => $user['prenom']
         ];
         echo json_encode($response);
     } else {
