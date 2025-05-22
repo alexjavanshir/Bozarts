@@ -14,6 +14,17 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table pour les FAQ
+CREATE TABLE IF NOT EXISTS faq (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question VARCHAR(255) NOT NULL,
+    titre_reponse VARCHAR(255) NOT NULL,
+    reponse TEXT NOT NULL,
+    ordre INT DEFAULT 0,
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_modification DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Table des produits
 CREATE TABLE IF NOT EXISTS produits (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -125,3 +136,16 @@ INSERT INTO avis (client_id, produit_id, note, commentaire, date_creation) VALUE
 (2, 4, 4, 'Belle chaise, très confortable et solide.', '2024-03-12 15:40:00'),
 (3, 5, 5, 'Collier magnifique, la pierre de lune est superbe.', '2024-03-11 10:30:00'),
 (1, 6, 4, 'Jolies boucles d\'oreilles, très élégantes.', '2024-03-10 13:25:00');
+
+-- Insertion des données de FAQ
+INSERT INTO faq (question, titre_reponse, reponse, ordre) VALUES
+('Comment devenir artisan sur Bozarts ?', 'Processus d\'inscription pour les artisans', 'Pour devenir artisan sur Bozarts, il vous suffit de créer un compte en sélectionnant "Artisan" comme type de profil lors de l\'inscription. Vous devrez ensuite compléter votre profil avec vos informations professionnelles, une description de votre activité et télécharger quelques photos de vos créations. Notre équipe validera votre compte dans un délai de 48h ouvrées.', 1),
+('Comment passer commande sur Bozarts ?', 'Processus de commande', 'Pour commander sur Bozarts, parcourez notre galerie de produits et ajoutez les articles souhaités à votre panier. Vous pouvez également contacter directement un artisan pour une commande personnalisée. Une fois vos articles sélectionnés, rendez-vous dans votre panier, vérifiez votre commande et procédez au paiement. Vous recevrez une confirmation par email avec le suivi de votre commande.', 2),
+('Quels sont les délais de livraison ?', 'Délais de livraison', 'Les délais de livraison varient selon les artisans et le type de produit. Pour les articles en stock, comptez 3 à 5 jours ouvrés. Pour les créations sur mesure, le délai est indiqué par l\'artisan lors de la validation de votre commande. Vous pouvez suivre l\'avancement de votre commande dans la section "Mes transactions" de votre compte.', 3),
+('Quels sont les modes de paiement acceptés ?', 'Options de paiement', 'Bozarts accepte plusieurs modes de paiement sécurisés : carte bancaire (Visa, Mastercard), PayPal, et virement bancaire. Pour les commandes personnalisées importantes, un acompte peut être demandé avant la réalisation. Tous les paiements sont sécurisés et vos informations bancaires ne sont jamais stockées sur notre plateforme.', 4),
+('Comment contacter un artisan pour une commande personnalisée ?', 'Commandes personnalisées', 'Pour demander une création sur mesure, visitez le profil de l\'artisan qui vous intéresse et cliquez sur le bouton "Contacter l\'artisan" ou "Commander sur mesure". Décrivez précisément votre projet, les dimensions souhaitées, matériaux, couleurs, etc. L\'artisan vous répondra avec un devis et un délai estimatif. Une fois les détails finalisés, vous pourrez procéder au paiement pour lancer la création.', 5),
+('Quelle est la politique de retour et remboursement ?', 'Retours et remboursements', 'Si vous n\'êtes pas satisfait de votre achat, vous disposez de 14 jours à compter de la réception pour nous signaler votre intention de retour. Les articles doivent être retournés dans leur état d\'origine et dans leur emballage. Pour les créations personnalisées, les retours ne sont généralement pas acceptés, sauf en cas de défaut avéré. Contactez notre service client pour plus d\'informations sur la procédure de retour.', 6),
+('Comment devenir vendeur sur Bozarts et quelles sont les commissions ?', 'Devenir vendeur et commissions', 'Pour vendre sur Bozarts, inscrivez-vous comme artisan et complétez votre profil professionnel. Bozarts prélève une commission de 10% sur chaque vente réalisée sur la plateforme. Cette commission comprend les frais de traitement des paiements et l\'utilisation de nos services. Les paiements sont versés aux artisans tous les 15 jours, après déduction de la commission. Vous pouvez consulter vos ventes et revenus dans votre espace vendeur.', 7),
+('Comment promouvoir mes créations sur Bozarts ?', 'Promotion de vos créations', 'Pour mettre en valeur vos créations, ajoutez des photos de qualité, des descriptions détaillées et utilisez des mots-clés pertinents. Participez activement à la communauté en répondant rapidement aux messages et en publiant régulièrement de nouvelles créations. Bozarts propose également des options de mise en avant payantes comme l\'affichage en tête de liste ou la présentation dans notre newsletter mensuelle. Contactez-nous pour plus d\'informations sur ces services.', 8),
+('Comment fonctionne le système d\'évaluation des artisans ?', 'Système d\'évaluation', 'Après chaque achat, les clients peuvent évaluer l\'artisan sur une échelle de 1 à 5 étoiles et laisser un commentaire. Ces évaluations portent sur la qualité du produit, la communication et le respect des délais. La note moyenne est affichée sur le profil de l\'artisan. Ce système permet de valoriser les artisans de qualité et d\'aider les clients dans leurs choix. Les avis inappropriés peuvent être signalés à notre équipe de modération.', 9),
+('Comment participer aux événements et salons organisés par Bozarts ?', 'Événements et salons', 'Bozarts organise régulièrement des salons d\'artisanat et des expositions physiques pour permettre aux artisans de rencontrer leur public. Les artisans inscrits sur la plateforme sont prioritaires pour participer à ces événements. Pour vous inscrire, rendez-vous dans la section "Événements" de votre espace artisan et sélectionnez les événements qui vous intéressent. Les frais de participation et les modalités sont indiqués pour chaque événement.', 10);

@@ -160,39 +160,3 @@
         font-size: 1rem;
     }
 }
-
-/* Section admin */
-.admin-edit {
-    display: none;
-    margin: 20px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: var(--border-radius);
-}
-
-.admin-edit.active {
-    display: block;
-}
-
-.admin-edit textarea {
-    width: 100%;
-    min-height: 400px;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid var(--gray);
-    border-radius: var(--border-radius);
-}
-
-.admin-edit button {
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: 10px 20px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.admin-edit button:hover {
-    background-color: #e66d2a;
-}

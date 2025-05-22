@@ -53,13 +53,61 @@
     <main class="admin-container">
         <h1>Administration</h1>
         
-        <div class="admin-section">
+        <div class="admin-tabs">
+            <button class="tab-button active" data-tab="users">Gestion des utilisateurs</button>
+            <button class="tab-button" data-tab="faq">Gestion de la FAQ</button>
+        </div>
+        
+        <div class="admin-section tab-content active" id="users-tab">
             <h2>Gestion des utilisateurs</h2>
             <div class="search-bar">
                 <input type="text" id="search-users" placeholder="Rechercher un utilisateur...">
             </div>
             <div class="users-list" id="users-list">
                 <!-- La liste des utilisateurs sera chargée dynamiquement -->
+            </div>
+        </div>
+        
+        <div class="admin-section tab-content" id="faq-tab">
+            <h2>Gestion de la FAQ</h2>
+            <div class="search-bar">
+                <input type="text" id="search-faq" placeholder="Rechercher dans la FAQ...">
+            </div>
+            
+            <button id="add-faq-btn" class="btn-admin btn-add">Ajouter une question</button>
+            
+            <div class="faq-list" id="faq-list">
+                <!-- La liste des FAQ sera chargée dynamiquement -->
+            </div>
+            
+            <!-- Formulaire d'ajout/édition de FAQ (initialement caché) -->
+            <div class="faq-form-container" id="faq-form-container">
+                <div class="faq-form">
+                    <h3 id="form-title">Ajouter une question</h3>
+                    <form id="faq-form">
+                        <input type="hidden" id="faq-id">
+                        
+                        <div class="form-group">
+                            <label for="faq-question">Question:</label>
+                            <input type="text" id="faq-question" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="faq-titre">Titre de la réponse:</label>
+                            <input type="text" id="faq-titre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="faq-reponse">Réponse:</label>
+                            <textarea id="faq-reponse" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="cancel-faq-btn" class="btn-admin btn-cancel">Annuler</button>
+                            <button type="submit" class="btn-admin btn-submit">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
