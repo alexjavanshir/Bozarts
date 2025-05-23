@@ -47,10 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
             
-            $targetFilePath = $uploadDir . uniqid() . '-' . $fileName;
+            // Générer un nom de fichier unique
+            $newFileName = uniqid() . '-' . $fileName;
+            $targetFilePath = $uploadDir . $newFileName;
 
         if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
-            // 3. Requête d'insertion
+            // Sauvegarder le chemin relatif complet dans la base de données
+            $imageDbPath = '../assets/articles/' . $newFileName;
             $sql = "INSERT INTO produits (nom, description, prix, image_url, categorie, artisan_id)
                     VALUES (:nom, :description, :prix, :image_url, :categorie, :artisan_id)";
             $stmt = $pdo->prepare($sql);
@@ -58,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':nom' => $nom,
                 ':description' => $description,
                 ':prix' => $prix,
-                ':image_url' => $targetFilePath,
+                ':image_url' => $imageDbPath,
                 ':categorie' => $categorie,
                 ':artisan_id' => $_SESSION['user_id']
             ]);

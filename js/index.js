@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Si c'est un client non connecté, on garde le bandeau "Join Us" par défaut
             else {
                 joinUsSection.innerHTML = ` 
-                <h2 class="section-title">Bienvenue sur Bozarts - NON CONNCETE!</h2>
+                <h2 class="section-title">Bienvenue sur Bozarts !</h2>
                 <div class="rejoindre-text">
                     <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l'art sous toutes ses formes.</p>
                 </div>

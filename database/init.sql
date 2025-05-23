@@ -131,12 +131,12 @@ INSERT INTO utilisateurs (type, nom, prenom, email, mot_de_passe, description, a
 
 -- Insertion des produits
 INSERT INTO produits (artisan_id, nom, description, prix, image_url, categorie) VALUES
-(4, 'Vase en céramique bleu', 'Vase artisanal en céramique émaillée bleue, pièce unique', 89.99, 'vase_bleu.jpg', 'Céramique'),
-(4, 'Service à thé', 'Service à thé complet en céramique blanche avec motifs floraux', 149.99, 'service_the.jpg', 'Céramique'),
-(5, 'Table basse en chêne', 'Table basse sculptée en chêne massif, design contemporain', 299.99, 'table_basse.jpg', 'Mobilier'),
-(5, 'Chaise artisanale', 'Chaise en bois massif avec dossier sculpté', 199.99, 'chaise.jpg', 'Mobilier'),
-(6, 'Collier en argent', 'Collier en argent 925 avec pierre de lune', 79.99, 'collier.jpg', 'Bijoux'),
-(6, 'Boucles d\'oreilles', 'Boucles d\'oreilles en argent avec améthyste', 59.99, 'boucles_oreilles.jpg', 'Bijoux');
+(4, 'Vase en céramique bleu', 'Vase artisanal en céramique émaillée bleue, pièce unique', 89.99, '../assets/articles/article1.jpg', 'Céramique'),
+(4, 'Service à thé', 'Service à thé complet en céramique blanche avec motifs floraux', 149.99, '../assets/articles/article2.jpg', 'Céramique'),
+(5, 'Table basse en chêne', 'Table basse sculptée en chêne massif, design contemporain', 299.99, '../assets/articles/article3.jpg', 'Mobilier'),
+(5, 'Chaise artisanale', 'Chaise en bois massif avec dossier sculpté', 199.99, '../assets/articles/article4.jpg', 'Mobilier'),
+(6, 'Collier en argent', 'Collier en argent 925 avec pierre de lune', 79.99, '../assets/articles/article5.jpg', 'Bijoux'),
+(6, 'Boucles d\'oreilles', 'Boucles d\'oreilles en argent avec améthyste', 59.99, '../assets/articles/article6.jpg', 'Bijoux');
 
 -- Insertion des avis sur les produits
 INSERT INTO avis (client_id, produit_id, note, commentaire, date_creation) VALUES

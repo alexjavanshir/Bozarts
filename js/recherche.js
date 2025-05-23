@@ -63,14 +63,19 @@ function displaySearchResults(products) {
     const productCard = document.createElement('div');
     productCard.className = 'product-card';
     
-    // Vérifier si les propriétés existent et utiliser des valeurs par défaut si nécessaire
-    //const imageUrl = product.image_url ? `../assets/articles/${product.image_url}` : '../assets/articles/article_sans_image.jpg';
+    // Utilisez directement le chemin d'image fourni par la base de données
+    const imageUrl = product.image_url ? 
+        product.image_url : 
+        '../assets/articles/article_sans_image.jpg';
+
+    console.log("Recherche - Affichage image pour produit ID " + product.id + ": " + imageUrl);
+        
     const nom = product.nom || 'Produit sans nom';
     const description = product.description || 'Aucune description disponible';
     const prix = product.formatted_price || `${product.prix} €`;
     
     productCard.innerHTML = `
-      <img src= ../assets/articles/article${product.id}.jpg>
+      <img src="${imageUrl}" alt="${nom}" onerror="this.src='../assets/articles/article_sans_image.jpg'">
       <h3>${nom}</h3>
       <p>${description}</p>
       <p class="price">${prix}</p>

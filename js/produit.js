@@ -56,8 +56,7 @@ class ProductDisplay {
 
     // Met à jour l'affichage du produit
     updateProductDisplay(product) {
-        //this.elements.image.src = `../assets/articles/${product.image_url}`;
-        this.elements.image.src = `../assets/articles/article${this.productId}.jpg`;
+        this.elements.image.src = product.image_url;
         this.elements.image.alt = product.nom;
         this.elements.title.textContent = product.nom;
         this.elements.reference.textContent = `Catégorie: ${product.categorie}`;

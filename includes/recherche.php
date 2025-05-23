@@ -49,6 +49,8 @@ try {
                 while ($row = mysqli_fetch_assoc($result)) {
                     // Formater le prix pour l'affichage
                     $row['formatted_price'] = number_format($row['prix'], 2, ',', ' ') . ' €';
+                    // Log l'image_url pour débogage
+                    error_log("Recherche - image_url pour produit ID " . $row['id'] . ": " . $row['image_url']);
                     $products[] = $row;
                 }
                 
