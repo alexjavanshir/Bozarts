@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulaire = document.querySelector('.inscription-form');
     const messageErreur = document.getElementById('message-erreur');
     const fermer = document.getElementById('fermer');
+    const messageArea = document.getElementById('message-area');
     
     // S'assurer que le message est caché initialement
     if (messageErreur) {
@@ -26,6 +27,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = formulaire.querySelector('.form-submit');
     formulaire.insertBefore(errorContainer, submitButton);
     
+    // Function to display messages dynamically
+    function displayMessage(message, type) {
+        messageArea.innerHTML = ''; // Clear previous messages
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        // Use existing error-message class for errors, and a new success class for success
+        if (type === 'error') {
+            messageElement.classList.add('error-message');
+        } else {
+            messageElement.classList.add('message', type);
+        }
+        messageArea.appendChild(messageElement);
+    }
+    
     // Fonction pour valider le mot de passe
     function validatePassword(password) {
         // Vérifie la longueur minimale de 8 caractères
@@ -45,10 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
     formulaire.addEventListener('submit', async function(e) {
         e.preventDefault();
         
+        // Clear previous messages on new submission
+        messageArea.innerHTML = '';
+
         // Vérification du captcha
         const captchaResponse = grecaptcha.getResponse();
         if (!captchaResponse) {
-            alert('Veuillez compléter le captcha');
+            displayMessage('Veuillez compléter le captcha', 'error');
             return;
         }
 
@@ -59,13 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Vérification des mots de passe
         if (password !== confirmPassword) {
-            alert('Les mots de passe ne correspondent pas');
+            displayMessage('Les mots de passe ne correspondent pas', 'error');
             return;
         }
 
         // Vérification des conditions
         if (!conditions) {
-            alert('Vous devez accepter les conditions d\'utilisation');
+            displayMessage('Vous devez accepter les conditions d\'utilisation', 'error');
             return;
         }
 
@@ -85,13 +103,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (data.success) {
-                window.location.href = 'completer-profil.html';
+                displayMessage('Inscription réussie ! Vous allez être redirigé.', 'success');
+                // Rediriger l'utilisateur après un court délai
+                setTimeout(function() {
+                    window.location.href = 'connexion.html'; // Ou la page de connexion
+                }, 2000);
             } else {
-                alert(data.message || 'Une erreur est survenue lors de l\'inscription');
+                displayMessage(data.message || 'Une erreur est survenue lors de l\'inscription.', 'error');
             }
         } catch (error) {
             console.error('Erreur:', error);
-            alert('Une erreur est survenue lors de l\'inscription');
+            displayMessage('Une erreur est survenue lors de l\'envoi du formulaire.', 'error');
         }
     });
 });
