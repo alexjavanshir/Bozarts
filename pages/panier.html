@@ -26,6 +26,9 @@
       <div class="user-welcome" id="userWelcome">
       </div>
       <div class="header-right">
+        <a href="mes-transactions.html" class="icon-button" style="width: 20%">
+          <img src="../assets/icons/mes-transactions.png" alt="Transactions" class="icon-img" />
+        </a>
         <a href="panier.html" class="icon-button" style="width: 20%">
           <img
             src="../assets/icons/panier-icon.png"
@@ -103,6 +106,54 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal de paiement -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Paiement</h2>
+        <form id="paymentForm" class="payment-form">
+          <div class="form-group">
+            <label for="cardNumber">Numéro de carte</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expiryDate">Date d'expiration</label>
+              <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/AA" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cardName">Nom sur la carte</label>
+            <input type="text" id="cardName" name="cardName" placeholder="JEAN DUPONT" required>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Adresse de livraison</label>
+            <input type="text" id="address" name="address" placeholder="123 rue Example" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postalCode">Code postal</label>
+              <input type="text" id="postalCode" name="postalCode" placeholder="75000" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label for="city">Ville</label>
+              <input type="text" id="city" name="city" placeholder="Paris" required>
+            </div>
+          </div>
+
+          <button type="submit" class="payment-submit">Payer</button>
+        </form>
+      </div>
+    </div>
 
     <script src="../js/header.js"></script>
     <script src="../js/panier.js"></script>

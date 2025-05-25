@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log('Données reçues:', data); // Log pour le débogage
         
         // Récupérer le lien du profil dans l'en-tête
-        const profileLink = document.querySelector('.header-right a:nth-child(3)');
+        const profileLink = document.querySelector('.header-right a:last-child');
         const userWelcome = document.getElementById('userWelcome');
         
         if (data.id) {

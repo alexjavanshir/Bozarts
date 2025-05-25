@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Transactions - Bozarts</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/transactions.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="../pages/index.html" class="icon-button">
+                <img src="../assets/icons/LOGO.png" alt="BOZARTS" />
+            </a>
+        </div>
+        <div class="search-container">
+            <form action="recherche.html" method="get">
+                <input type="text" name="search" class="search-box" placeholder="Rechercher" />
+                <button type="submit" class="search-button">
+                    <img src="../assets/icons/search-icon.png" class="search-icon" alt="search icon" />
+                </button>
+            </form>
+        </div>
+        <div class="user-welcome" id="userWelcome">
+        </div>
+        <div class="header-right">
+            <a href="mes-transactions.html" class="icon-button" style="width: 20%">
+                <img
+                  src="../assets/icons/mes-transactions.png"
+                  alt="Transactions"
+                  class="icon-img"
+                />
+              </a>
+            <a href="panier.html" class="icon-button" style="width: 20%">
+                <img src="../assets/icons/panier-icon.png" alt="Panier" class="icon-img" />
+            </a>
+            <a href="messagerie.html" class="icon-button" id="notifications-link">
+                <img src="../assets/icons/notifications-icon.png" alt="Notifications" class="icon-img" />
+            </a>
+            <a href="connexion.html" class="icon-button">
+                <img src="../assets/icons/profil-icon.png" alt="Profil" class="icon-img" />
+            </a>
+        </div>
+    </header>
+
+    <main class="transactions-container">
+        <h1>Mes Transactions</h1>
+        <div class="transactions-sections">
+            <section class="transactions-section">
+                <h2>Mes Commandes</h2>
+                <div class="transactions-list" id="commandesEnvoyees">
+                    <!-- Les commandes envoyées seront chargées ici -->
+                </div>
+            </section>
+            <section class="transactions-section" id="sectionCommandesRecues">
+                <h2>Commandes Reçues</h2>
+                <div class="transactions-list" id="commandesRecues">
+                    <!-- Les commandes reçues seront chargées ici -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>© 2025 Bozarts. Tous droits réservés.</p>
+                <p><a href="../pages/CGU.html" class="footer-link">CGU & Mentions légales</a></p>
+                <p>Un problème non résolu par la FAQ ? <a href="messagerie.html?destinataire=admin" class="footer-link">Contactez-nous</a></p>
+            </div>
+            <div class="footer-center">
+                <ul class="footer-links">
+                    <li><a href="faq.html" class="footer-link">Notre FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <p>Suivez-nous</p>
+                <div class="social-icons">
+                    <a href="#"><img src="../assets/icons/facebook.png" alt="Facebook" /></a>
+                    <a href="#"><img src="../assets/icons/twitter.png" alt="Twitter" /></a>
+                    <a href="#"><img src="../assets/icons/instagram.png" alt="Instagram" /></a>
+                    <a href="#"><img src="../assets/icons/linkedin.png" alt="LinkedIn" /></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/transactions.js"></script>
+</body>
+</html> 
