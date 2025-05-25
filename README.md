@@ -22,6 +22,10 @@ Bozarts est une plateforme web permettant aux artisans et créateurs indépendan
   - Gestion des CGU
   - Gestion des FAQ
 - **Messagerie** entre utilisateurs
+- **Transactions**
+  - Historique des achats/ventes
+  - Suivi des commandes
+  - Gestion des paiements
 
 ## Structure du projet
 
@@ -33,7 +37,8 @@ bozarts/
 │   │   ├── profil.css         # Styles de la page profil
 │   │   ├── recherche.css      # Styles de la recherche
 │   │   ├── form.css           # Styles des formulaires
-│   │   └── events.css         # Styles de la gestion des événements
+│   │   ├── events.css         # Styles de la gestion des événements
+│   │   └── transactions.css   # Styles de la gestion des transactions
 │   ├── icons/                 # Icônes du site
 │   ├── articles/              # Images des produits
 │   └── images/                # Autres images
@@ -61,6 +66,7 @@ bozarts/
 │   ├── get-evenements.php     # Récupération des événements
 │   ├── get_faq.php            # Récupération des FAQ
 │   ├── get-mes-annonces.php   # Récupération des annonces
+│   ├── get-transactions.php   # Récupération des transactions
 │   ├── get_users.php          # Récupération des utilisateurs
 │   ├── inscription.php        # Inscription utilisateur
 │   ├── logout.php             # Déconnexion
@@ -91,7 +97,8 @@ bozarts/
 │   ├── produit.js             # Gestion des produits
 │   ├── profil.js              # Gestion du profil
 │   ├── recent-searches.js     # Gestion des recherches récentes
-│   └── recherche.js           # Gestion de la recherche
+│   ├── recherche.js           # Gestion de la recherche
+│   └── transactions.js        # Gestion des transactions
 ├── pages/
 │   ├── admin.html             # Interface d'administration
 │   ├── ajouter-evenement.html # Création d'événement
@@ -103,6 +110,7 @@ bozarts/
 │   ├── index.html             # Page d'accueil
 │   ├── inscription.html       # Page d'inscription
 │   ├── mes-annonces.html      # Gestion des annonces
+│   ├── mes-transactions.html  # Historique des transactions
 │   ├── messagerie.html        # Messagerie
 │   ├── panier.html            # Panier d'achat
 │   ├── produit.html           # Page produit
@@ -121,6 +129,7 @@ bozarts/
 - **Session utilisateur**: Le système maintient la session utilisateur entre les pages
 - **Profil personnalisé**: Chaque utilisateur peut voir et modifier ses informations
 - **Types de profils**: Différenciation entre clients et artisans avec fonctionnalités adaptées
+- **Transactions**: Suivi des achats et ventes pour chaque utilisateur
 
 ## Installation
 
