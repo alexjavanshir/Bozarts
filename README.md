@@ -10,8 +10,13 @@ Bozarts est une plateforme web permettant aux artisans et créateurs indépendan
 - **Système de commandes** personnalisées
 - **Galerie virtuelle** pour découvrir les créations
 - **Section événements** pour les salons et ateliers
+  - Création et gestion d'événements
+  - Gestion des participants
+  - Système d'inscription aux événements
 - **Système d'avis** pour les artisans
 - **Recherche avancée** de produits
+  - Historique des recherches récentes
+  - Suggestions de recherche
 
 ## Structure du projet
 
@@ -22,7 +27,8 @@ bozarts/
 │   │   ├── style.css          # Styles généraux du site
 │   │   ├── profil.css         # Styles de la page profil
 │   │   ├── recherche.css      # Styles de la recherche
-│   │   └── form.css           # Styles des formulaires
+│   │   ├── form.css           # Styles des formulaires
+│   │   └── events.css         # Styles de la gestion des événements
 │   ├── icons/                 # Icônes du site
 │   ├── articles/              # Images des produits
 │   └── images/                # Autres images
@@ -38,11 +44,17 @@ bozarts/
 │   ├── add_product.php        # Ajout de produit
 │   ├── place_order.php        # Gestion des commandes
 │   ├── add_review.php         # Gestion des avis
-│   └── search.php             # Recherche de produits
+│   ├── search.php             # Recherche de produits
+│   ├── ajouter_evenement.php  # Ajout d'un événement
+│   ├── modifier_evenement.php # Modification d'un événement
+│   ├── supprimer_evenement.php # Suppression d'un événement
+│   └── gerer_participants.php # Gestion des participants aux événements
 ├── js/
 │   ├── profil.js              # Gestion de la page profil
 │   ├── header.js              # Gestion dynamique de l'en-tête
-│   └── recherche.js           # Fonctionnalités de recherche
+│   ├── recherche.js           # Fonctionnalités de recherche
+│   ├── recent-searches.js     # Gestion des recherches récentes
+│   └── events.js              # Gestion des événements
 ├── pages/
 │   ├── index.html             # Page d'accueil
 │   ├── connexion.html         # Page de connexion
@@ -51,11 +63,15 @@ bozarts/
 │   ├── mes-annonces.html      # Gestion des annonces de l'artisan
 │   ├── panier.html            # Panier d'achat
 │   ├── produit.html           # Page produit
-│   └── recherche.html         # Page de recherche
+│   ├── recherche.html         # Page de recherche
+│   ├── evenements.html        # Liste des événements
+│   ├── ajouter-evenement.html # Création d'un événement
+│   └── gerer-evenements.html  # Gestion des événements
 ├── database/
 │   └── init.sql               # Structure initiale de la base de données
 └── uploads/
-    └── products/              # Dossier pour les images de produits uploadées
+    ├── products/              # Dossier pour les images de produits uploadées
+    └── events/                # Dossier pour les images d'événements
 ```
 
 ## Fonctionnement de la gestion utilisateur
