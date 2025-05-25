@@ -114,6 +114,31 @@ CREATE TABLE IF NOT EXISTS paniers (
     UNIQUE KEY unique_panier (client_id, produit_id)
 );
 
+-- Table des événements
+CREATE TABLE IF NOT EXISTS evenements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    createur_id INT NOT NULL,
+    titre VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    date_debut DATETIME NOT NULL,
+    date_fin DATETIME NOT NULL,
+    lieu VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255),
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (createur_id) REFERENCES utilisateurs(id)
+);
+
+-- Table des participants aux événements
+CREATE TABLE IF NOT EXISTS evenement_participants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    evenement_id INT NOT NULL,
+    participant_id INT NOT NULL,
+    date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (evenement_id) REFERENCES evenements(id),
+    FOREIGN KEY (participant_id) REFERENCES utilisateurs(id),
+    UNIQUE KEY unique_participant (evenement_id, participant_id)
+);
+
 -- Insertion des données de test
 
 
@@ -173,3 +198,9 @@ INSERT INTO cgu (titre, contenu, ordre) VALUES
 ('8. Limitation de responsabilité', 'Bozarts ne peut être tenu responsable des dommages directs ou indirects résultant de l\'utilisation du site ou de l\'impossibilité d\'y accéder.', 8),
 ('9. Modification des conditions', 'Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications prennent effet dès leur publication sur le site.', 9),
 ('10. Contact', 'Pour toute question concernant ces conditions, veuillez nous contacter via notre formulaire de contact.', 10);
+
+-- Insertion des données d'événements
+INSERT INTO evenements (createur_id, titre, description, date_debut, date_fin, lieu, image_url) VALUES
+(5, 'Exposition Artisanale Périgourdine', 'Découvrez l\'artisanat local du Périgord. Rencontrez les créateurs et admirez leurs œuvres uniques.', '2025-07-15 10:00:00', '2025-07-20 18:00:00', 'Place du Marché, Sarlat', 'assets/evenements/galerie_perigord.jpg'),
+(4, 'Atelier Sculpture sur Bois', 'Participez à un atelier interactif pour apprendre les bases de la sculpture sur bois avec un artisan expert.', '2025-08-10 14:00:00', '2025-08-10 17:00:00', 'Atelier de Luc Petit, Paris', 'assets/evenements/gallerie_sculpture.jpg'),
+(4, 'Salon des Créateurs Parisiens', 'Un événement regroupant les meilleurs artisans et créateurs de Paris. Idéal pour trouver des pièces originales.', '2025-09-20 09:00:00', '2025-09-22 19:00:00', 'Porte de Versailles, Paris', 'assets/evenements/gallerie_paris.jpg');
