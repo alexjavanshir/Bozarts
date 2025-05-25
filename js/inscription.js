@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayMessage('Inscription réussie ! Vous allez être redirigé.', 'success');
                 // Rediriger l'utilisateur après un court délai
                 setTimeout(function() {
-                    window.location.href = 'connexion.html'; // Ou la page de connexion
+                    window.location.href = 'completer-profil.html'; // Ou la page de connexion
                 }, 2000);
             } else {
                 displayMessage(data.message || 'Une erreur est survenue lors de l\'inscription.', 'error');
