@@ -73,10 +73,12 @@ function displaySearchResults(products) {
     const nom = product.nom || 'Produit sans nom';
     const description = product.description || 'Aucune description disponible';
     const prix = product.formatted_price || `${product.prix} €`;
+    const categorie = product.categorie || 'Non catégorisé';
     
     productCard.innerHTML = `
       <img src="${imageUrl}" alt="${nom}" onerror="this.src='../assets/articles/article_sans_image.jpg'">
       <h3>${nom}</h3>
+      <p class="category">${categorie}</p>
       <p>${description}</p>
       <p class="price">${prix}</p>
       <button onclick="viewProduct(${product.id})">Voir détails</button>

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Rediriger vers la page de profil
-        header("Location: ../pages/profil.html?id=" . $user_id);
+        header("Location: ../pages/index.html?id=" . $user_id);
         exit();
     } else {
         die("Erreur lors de la mise à jour du profil : " . $stmt->error);

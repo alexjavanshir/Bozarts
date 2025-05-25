@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             else if (data.type === 'client') {
                 // L'utilisateur est connecté en tant que client, modifier le bandeau
                 joinUsSection.innerHTML = `
-                    <h2 class="section-title">Bienvenue sur Bozarts !</h2>
+                    <h2 class="section-title">Content de vous voir ${data.nom} ${data.prenom} !</h2>
                     <div class="rejoindre-text">
-                        <p>Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l'art sous toutes ses formes.</p>
+                        <p>Bozarts; Des créations qui racontent une histoire.<br> Explore les œuvres de talents émergents, partage ta vision du monde et rejoins une communauté passionnée par l'art sous toutes ses formes.</p>
                     </div>
                     <a href="recherche.html?search=+" class="join-button">Découvrir</a>
                 `;

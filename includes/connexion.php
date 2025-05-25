@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Réponse JSON de succès
                 echo json_encode([
                     'success' => true, 
-                    'redirect' => '../pages/profil.html?id=' . $_SESSION['user_id']
+                    'redirect' => '../pages/index.html?id=' . $_SESSION['user_id']
                 ]);
                 exit();
             } else {

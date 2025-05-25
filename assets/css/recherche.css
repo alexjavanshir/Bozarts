@@ -81,6 +81,14 @@
   overflow: hidden;
 }
 
+.product-card .category {
+  color: var(--primary-color);
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
 h1 {
   font-size: 20px;
   color: #f47f3b;

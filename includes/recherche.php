@@ -27,7 +27,7 @@ try {
         error_log("Recherche: " . $search);
         
         // Requête simplifiée sans la table artisans
-        $sql = "SELECT * FROM produits WHERE (nom LIKE ? OR description LIKE ?)";
+        $sql = "SELECT * FROM produits WHERE (nom LIKE ? OR description LIKE ? OR categorie LIKE ?)";
         
         if ($min_price > 0 || $max_price < PHP_FLOAT_MAX) {
             $sql .= " AND prix BETWEEN ? AND ?";
@@ -37,9 +37,9 @@ try {
         
         if ($stmt = mysqli_prepare($conn, $sql)) {
             if ($min_price > 0 || $max_price < PHP_FLOAT_MAX) {
-                mysqli_stmt_bind_param($stmt, "ssdd", $search_param, $search_param, $min_price, $max_price);
+                mysqli_stmt_bind_param($stmt, "sssdd", $search_param, $search_param, $search_param, $min_price, $max_price);
             } else {
-                mysqli_stmt_bind_param($stmt, "ss", $search_param, $search_param);
+                mysqli_stmt_bind_param($stmt, "sss", $search_param, $search_param, $search_param);
             }
             
             if (mysqli_stmt_execute($stmt)) {

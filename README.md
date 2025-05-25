@@ -49,7 +49,6 @@ bozarts/
 │   ├── inscription.html       # Page d'inscription
 │   ├── profil.html            # Page de profil utilisateur
 │   ├── mes-annonces.html      # Gestion des annonces de l'artisan
-│   ├── mes-transactions.html  # Suivi des transactions
 │   ├── panier.html            # Panier d'achat
 │   ├── produit.html           # Page produit
 │   └── recherche.html         # Page de recherche

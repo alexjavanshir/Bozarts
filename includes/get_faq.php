@@ -13,7 +13,7 @@ if ($result) {
         $faqs[] = [
             'id' => $row['id'],
             'question' => $row['question'],
-            'titre_reponse' => $row['titre_reponse'],
+                'titre_reponse' => $row['titre_reponse'],
             'reponse' => $row['reponse']
         ];
     }
